@@ -1,0 +1,6 @@
+name = "ywam-sendai-guide"
+compatibility_date = "2026-05-04"
+compatibility_flags = [ "nodejs_compat" ]
+
+[site]
+bucket = "./dist"
