@@ -7,3 +7,11 @@ directory = "./dist"
 
 [observability]
 enabled = false
+
+# Bindings for the AI Chatbot logic
+[[vectorize]]
+binding = "VECTORIZE"
+index_name = "ywam-guide-index"
+
+[ai]
+binding = "AI"
