@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Direct search engines to your sitemap
+Sitemap: https://guide.ywamsendai.org/sitemap-index.xml

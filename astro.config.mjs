@@ -27,6 +27,16 @@ export default defineConfig({
       icon: 'external' 
       },
       ],
+      head: [
+    {
+      tag: 'meta',
+      attrs: { property: 'og:image', content: 'https://guide.ywamsendai.org/og-image.jpg' },
+    },
+    {
+      tag: 'meta',
+      attrs: { name: 'twitter:card', content: 'summary_large_image' },
+    },
+  ],
     sidebar: [
       {
         label: '1. Foundations',

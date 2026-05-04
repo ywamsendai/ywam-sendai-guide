@@ -302,3 +302,20 @@ main { animation: none !important; }
   font-family: 'Cinzel', serif;
   letter-spacing: 0.05em;
 }
+
+.content-panel h1 {
+  font-family: 'Cinzel', serif !important;
+  color: #c5a059 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 400;
+  margin-bottom: .5rem;
+}
+
+/* 
+   If the auto-header feels too far from the top after removing 
+   your manual one, you can tighten the padding here:
+*/
+.sl-container {
+  padding-top: .5rem !important;
+}
