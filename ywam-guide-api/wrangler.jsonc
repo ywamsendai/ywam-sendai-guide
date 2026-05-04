@@ -10,10 +10,6 @@
 	"vectorize": [
 		{
 			"binding": "VECTORIZE",
-			"index_name": "ywam-guide-index"
-		},
-		{
-			"binding": "VECTORIZE",
 			"index_name": "ywam-guide-index",
 			"remote": true
 		}
