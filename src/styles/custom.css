@@ -1,0 +1,304 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel&family=Inter:wght@300;600&display=swap');
+
+:root {
+  /* The Core "Vibe" Colors */
+  --sl-color-bg: #050505;        /* Your dark background */
+  --sl-color-accent-low: #1a1a1a;
+  --sl-color-accent: #c5a059;    /* Your Gold Accent */
+  --sl-color-accent-high: #e2c284;
+  
+  /* Text & Contrast */
+  --sl-color-white: #ffffff;
+  --sl-color-gray-1: #eeeeee;
+  --sl-color-gray-2: #c2c2c2;
+  --sl-color-gray-3: #8b8b8b;
+  --sl-color-gray-4: #525252;
+  --sl-color-gray-5: #262626;
+  --sl-color-gray-6: #171717;
+}
+
+/* 2. Typography: Bringing in the Monastic Serifs */
+:root {
+  --sl-font-system: 'Inter', sans-serif;
+  --sl-font-heading: 'Cinzel', serif; /* Matching your main site headings */
+}
+
+/* Force Dark Mode variables even if the system prefers light */
+:root,
+[data-theme='light'] {
+  --sl-color-bg: #050505 !important;
+  --sl-color-white: #ffffff !important;
+  --sl-color-gray-1: #eeeeee !important;
+  --sl-color-gray-2: #c2c2c2 !important;
+  --sl-color-gray-3: #8b8b8b !important;
+  --sl-color-accent: #c5a059 !important;
+  --sl-color-accent-high: #e2c284 !important;
+  --sl-color-accent-low: #1a1a1a !important;
+}
+
+/* Hide the toggle entirely so no one can even try to switch */
+starlight-theme-select {
+  display: none !important;
+}
+
+/* 3. Subtle Aesthetic Tweaks */
+
+/* Make the header translucent like your Vibe nav */
+.header {
+  background-color: rgba(5, 5, 5, 0.8) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Clean up the sidebar to feel more like a "Portal" */
+.sidebar-content {
+  background-color: #050505 !important;
+}
+
+/* Make links feel more "Gold" and less "Web" */
+a {
+  text-decoration: none !important;
+}
+
+/* Customizing the "Content" area for better focus */
+.main-frame {
+  background-color: #050505;
+}
+
+/* Style the "Language Switcher" to match your minimalist look */
+.sl-flex select {
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: transparent !important;
+  color: #c5a059 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.7rem;
+}
+
+/* Make the main typography feel "Monastic" */
+.sl-markdown-content {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--sl-color-gray-2);
+}
+
+/* Use Cinzel for all internal headers */
+.sl-markdown-content h1, 
+.sl-markdown-content h2, 
+.sl-markdown-content h3 {
+  font-family: 'Cinzel', serif !important;
+  color: var(--sl-color-accent) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 400;
+}
+
+/* Add a subtle gold left-border to blockquotes for emphasized vision points */
+.sl-markdown-content blockquote {
+  border-inline-start: 1px solid var(--sl-color-accent);
+  background-color: rgba(197, 160, 89, 0.05);
+  padding: 1rem 2rem;
+  font-style: italic;
+}
+
+/* src/styles/custom.css */
+
+/* Center the Hero text now that the logo is gone */
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh; /* Gives the text room to breathe */
+  text-align: center;
+}
+
+/* Create the Branded Footer */
+footer {
+  border-top: 1px solid rgba(197, 160, 89, 0.1) !important;
+  padding: 4rem 0 !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #050505;
+}
+
+/* Inject the Logo as a 'Seal' in the footer */
+footer::before {
+  content: "";
+  display: block;
+  width: 80px; /* Small, elegant size */
+  height: 80px;
+  background-image: url('/src/assets/ywamsendailogo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-bottom: 2rem;
+  opacity: 0.6; /* Subtle, not shouting */
+  filter: grayscale(1) brightness(1.5); /* Makes it feel like part of the stone/paper */
+}
+
+.hero-title {
+  font-family: 'Cinzel', serif !important;
+  letter-spacing: 0.4em !important;
+  text-transform: uppercase;
+  color: var(--sl-color-accent) !important; /* Gold Title */
+  margin-bottom: 1rem;
+}
+
+.tagline {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.05em;
+  color: var(--sl-color-gray-2) !important;
+  max-width: 30ch; /* Keeps the text from stretching too wide */
+}
+
+/* Hide the Dark/Light theme toggle */
+.type-select, 
+starlight-theme-select {
+  display: none !important;
+}
+
+/* --- High-Priority Search Styling --- */
+
+/* Target the actual button inside the search container */
+:is([data-theme]) #starlight__search button {
+  background-color: transparent !important;
+  border: 1px solid rgba(197, 160, 89, 0.25) !important;
+  border-radius: 4px !important;
+  padding: 0.5rem 1rem !important;
+  color: var(--sl-color-gray-2) !important;
+  box-shadow: none !important;
+}
+
+/* Hover state: Brighten the gold border */
+:is([data-theme]) #starlight__search button:hover {
+  border-color: var(--sl-color-accent) !important;
+  background-color: rgba(197, 160, 89, 0.03) !important;
+}
+
+/* Hide the "Ctrl K" / "⌘ K" keyboard shortcut label */
+:is([data-theme]) #starlight__search kbd {
+  display: none !important;
+}
+
+/* Change the magnifying glass icon to your Gold */
+:is([data-theme]) #starlight__search .sl-icon {
+  color: var(--sl-color-accent) !important;
+}
+
+/* Optional: Hide the word "Search" to make it look even more monastic/minimal */
+/*
+:is([data-theme]) #starlight__search .label {
+  display: none !important;
+}
+*/
+
+/* Make sidebar links feel more elegant */
+.sidebar-content a {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  color: var(--sl-color-gray-3) !important;
+  transition: color 0.2s ease;
+}
+
+/* Highlight the active page in Gold */
+.sidebar-content a[aria-current="page"] {
+  color: var(--sl-color-accent) !important;
+  font-weight: 500;
+  background-color: rgba(197, 160, 89, 0.05) !important;
+}
+
+/* Style the sidebar group labels (e.g., "VISION") */
+.sidebar-content .group-label {
+  font-family: 'Cinzel', serif;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.75rem;
+  color: var(--sl-color-gray-4) !important;
+  margin-top: 1.5rem;
+}
+
+/* Kill the old stuttery animation */
+main { animation: none !important; }
+
+/* Use a standard CSS fade that is lighter on the browser */
+.main-frame {
+  opacity: 0;
+  animation: fadeInContent 0.4s ease-out forwards;
+  animation-delay: 0.1s; /* Tiny delay prevents the "flash" */
+}
+
+@keyframes fadeInContent {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* --- Community "Stone Tablet" Cards --- */
+
+/* The Card Container */
+.sl-card {
+  background-color: #0a0a0a !important; /* Slightly lighter than the #050505 background */
+  border: 1px solid rgba(197, 160, 89, 0.15) !important; /* Faint gold border */
+  border-radius: 2px !important; /* Sharp, architectural corners */
+  padding: 1.5rem !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.sl-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(197, 160, 89, 0.4) !important;
+}
+
+/* The Icon inside the card */
+.sl-card .icon {
+  color: var(--sl-color-accent) !important;
+  background-color: rgba(197, 160, 89, 0.05) !important;
+  border-radius: 0 !important; /* Square icons feel more "monastic" */
+  padding: 0.5rem;
+}
+
+/* The Card Title (The "Way") */
+.sl-card .title {
+  font-family: 'Cinzel', serif !important;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--sl-color-accent) !important;
+  font-size: 1.1rem !important;
+}
+
+/* The Card Body (The Description) */
+.sl-card .description {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--sl-color-gray-2) !important;
+}
+
+/* --- Vertical Timeline (Steps) Styling --- */
+
+/* The vertical line connecting the steps */
+.sl-steps {
+  border-inline-start: 2px solid rgba(197, 160, 89, 0.2) !important;
+}
+
+/* The circular numbers/bullets */
+.sl-steps > li::before {
+  background-color: #050505 !important;
+  border: 2px solid var(--sl-color-accent) !important;
+  color: var(--sl-color-accent) !important;
+  font-family: 'Cinzel', serif;
+  font-weight: bold;
+}
+
+/* The Heading inside the steps */
+.sl-steps strong {
+  color: var(--sl-color-accent) !important;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.05em;
+}

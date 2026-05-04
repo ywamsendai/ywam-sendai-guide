@@ -1,0 +1,23 @@
+---
+/* src/pages/index.astro */
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="0;url=/en/">
+    <title>Redirecting to YWAM Sendai Guide</title>
+    <script is:inline>
+        // Optional: Browser-based language detection
+        const userLang = navigator.language || navigator.userLanguage;
+        if (userLang.startsWith('ja')) {
+            window.location.href = '/ja/';
+        } else {
+            window.location.href = '/en/';
+        }
+    </script>
+</head>
+<body style="background: #050505; color: #c5a059; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh;">
+    <p>Loading the Guide... <a href="/en/" style="color: white;">Click here if not redirected.</a></p>
+</body>
+</html>

@@ -1,0 +1,79 @@
+---
+title: お支払いとご寄付
+description: 授業料、スタッフ費、または献金を送金する方法。
+sidebar:
+  order: 6
+---
+
+import { Aside, Steps, Card, CardGrid, LinkButton } from '@astrojs/starlight/components';
+
+# 財務に関するお手続き
+
+スクールの授業料、スタッフ費、または仙台での拠点購入に向けたご寄付など、皆様の尊いご支援に心より感謝いたします。
+
+---
+
+## 1. 日本国内からの送金
+日本国内の銀行口座をお持ちの方は、ゆうちょ銀行への振込が最もスムーズです。
+
+**ゆうちょ銀行 間での送金:**
+* **記号:** 10140
+* **番号:** 65305041
+* **名義:** セカイセイネンセンキョウカイ
+
+**他行からの振込:**
+* **店名:** 〇一八（ゼロイチハチ）
+* **店番:** 018
+* **預金種目:** 普通預金
+* **口座番号:** 6530504
+
+---
+
+## 2. 海外からの送金 (Wise)
+海外から送金される場合は、手数料が最も安い **Wise** の利用を強くお勧めします。
+
+<Aside type="danger" title="重要">
+日本の銀行口座へ直接海外送金をすることはできません。必ずWiseのアプリまたはウェブサイトを経由して手続きを行ってください。
+</Aside>
+
+**受取人情報:**
+* **受取人の種類:** 法人・団体 (Business / Charity)
+* **口座名義:** セカイセイネンセンキョウカイ
+* **銀行名:** [0310] GMOあおぞらネット銀行
+* **支店名:** [101] 法人営業部
+* **口座種別:** 普通
+* **口座番号:** 2042380
+
+---
+
+## 3. その他の支払い方法（クレジットカード・PayPal）
+Wiseや銀行振込が利用できない場合は、以下のリンクからお手続きが可能です。
+
+<Aside type="caution">
+注意：これらの方法では、約4%の決済手数料が発生し、為替レートも銀行振込に比べて不利になります。可能な限り **Wise** のご利用を推奨いたします。
+</Aside>
+
+<CardGrid>
+  <Card title="クレジットカード" icon="external">
+    Stripe経由で決済されます。登録料などの迅速な支払いに適しています。
+    <br />
+    <LinkButton href="https://buy.stripe.com/28EaEZgJcgATdIrer82Fa00" variant="primary">
+      カードで支払う
+    </LinkButton>
+  </Card>
+  <Card title="PayPal" icon="external">
+    PayPal残高や連携済みの銀行口座からお支払いいただけます。
+    <br />
+    <LinkButton href="https://www.paypal.com/ncp/payment/F2BWGTCV6H9P2" variant="secondary">
+      PayPalで支払う
+    </LinkButton>
+  </Card>
+</CardGrid>
+
+---
+
+## 4. 送金後のご連絡
+入金を正確に確認するため、送金後は必ず **finance@ywamsendai.org** まで以下の内容をメールでお知らせください。
+* 送金日
+* 送金額
+* 送金の目的（例：「DTS授業料」「スタッフ費」「建物基金への寄付」など）

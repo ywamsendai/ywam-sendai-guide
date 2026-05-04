@@ -1,0 +1,43 @@
+---
+title: YWAM Sendai
+description: The heart and order of our community.
+template: splash
+hero:
+  tagline: Stewardship and community life in the heart of Tohoku. Since 2018.
+  actions:
+    - text: Enter the Path
+      link: /en/foundations/vision-values/
+      icon: right-arrow
+      variant: primary
+    - text: Main Site
+      link: https://ywamsendai.org
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## The Four Pillars
+
+<CardGrid stagger>
+    <a href="/en/foundations/vision-statement/" style="text-decoration: none;">
+        <Card title="1. Foundations" icon="sun">
+            Our Vision, the Staffing Covenant, and our history in Sendai since 2018.
+        </Card>
+    </a>
+    <a href="/en/community/guidelines/" style="text-decoration: none;">
+        <Card title="2. Community" icon="heart">
+            Daily rhythms, house guidelines, and shared stewardship in Tohoku.
+        </Card>
+    </a>
+    <a href="/en/training/overview/" style="text-decoration: none;">
+        <Card title="3. Schools & Training" icon="open-book">
+            Information for the September 2026 DTS and upcoming DBS terms.
+        </Card>
+    </a>
+    <a href="/en/operations/digital-stewardship/" style="text-decoration: none;">
+        <Card title="4. Operations" icon="setting">
+            Internal protocols for finance, legalities, and digital systems.
+        </Card>
+    </a>
+</CardGrid>
