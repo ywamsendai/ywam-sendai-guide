@@ -3,29 +3,30 @@ import starlight from '@astrojs/starlight';
 import tailwindv4 from '@tailwindcss/vite';
 import mdx from '@astrojs/mdx';
 
+import sitemap from '@astrojs/sitemap';
+
 export default defineConfig({
   // No 'base' needed if using a subdomain like guide.ywamsendai.org
   site: 'https://guide.ywamsendai.org',
   
-  integrations: [
-  starlight({
+  integrations: [starlight({
     title: 'YWAM Sendai Guide',
     defaultLocale: 'en',
     locales: {
       en: { label: 'English', lang: 'en' },
       ja: { label: '日本語', lang: 'ja' },
     },
-	  logo: {
-    	src: './src/assets/ywamsendailogo.png', // Copy your logo into this repo
-    	replacesTitle: false,
+      logo: {
+        src: './src/assets/ywamsendailogo.png', // Copy your logo into this repo
+        replacesTitle: false,
     },
-	  social: [
+      social: [
       { 
       label: 'Main Site', 
       href: 'https://ywamsendai.org', 
       icon: 'external' 
       },
-	  ],
+      ],
     sidebar: [
       {
         label: '1. Foundations',
@@ -75,8 +76,8 @@ export default defineConfig({
     ],
     // Add your brand colors here to match the Vibe site
     customCss: ['./src/styles/custom.css'],
-	  disable404Route: true,
-  }), mdx()],
+      disable404Route: true,
+  }), mdx(), sitemap()],
   vite: {
     plugins: [tailwindv4()],
   },
