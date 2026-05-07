@@ -13,4 +13,4 @@ binding = "AI"
 
 [[vectorize]]
 binding = "VECTORIZE"
-index_name = "sendai-guide-index"
+index_name = "ywam-guide-index"
