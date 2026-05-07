@@ -1,8 +1,9 @@
-// REPLACE THE URL BELOW with your actual Worker URL
-const WORKER_URL = 'https://ywam-guide-api.ywamsendai.workers.dev'; 
-
+// pump-guide.mjs
 import fs from 'fs';
 import { glob } from 'glob';
+import crypto from 'crypto';
+
+const WORKER_URL = process.env.WORKER_URL || 'https://ywam-guide-api.ywamsendai.workers.dev'; 
 
 async function pump() {
   console.log("🚀 Starting the engine...");
@@ -10,45 +11,51 @@ async function pump() {
   const files = await glob('src/content/docs/**/*.{md,mdx}');
   
   if (files.length === 0) {
-    console.error("❌ No files found! Are you running this in the Guide directory?");
+    console.error("❌ No files found!");
     return;
   }
 
   for (const file of files) {
     const content = fs.readFileSync(file, 'utf-8');
-    const lang = file.includes('/ja/') ? 'ja' : 'en';
+    const lang = file.split(/[\\/]/).includes('ja') ? 'ja' : 'en';
     const cleanPath = file
       .replace('src/content/docs', '')
       .replace(/\.mdx?$/, '');
 
+    // Split by double newlines
     const chunks = content.split(/\n\n+/).filter(c => c.trim().length > 40);
 
-    console.log(`📖 Reading [${lang.toUpperCase()}]: ${cleanPath} (${chunks.length} chunks)`);
+    console.log(`📖 Syncing [${lang.toUpperCase()}]: ${cleanPath} (${chunks.length} chunks)`);
 
-    for (const text of chunks) {
+    for (let i = 0; i < chunks.length; i++) {
+      const text = chunks[i].trim();
+      
+      // Create a deterministic ID: "en-dts-costs-chunk-0"
+      // This ensures that if the file is updated, the same ID is overwritten
+      const chunkId = `${lang}-${cleanPath.replace(/\//g, '-')}-chunk-${i}`;
+
       try {
         const response = await fetch(`${WORKER_URL}/ingest`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            // ADDED SUBSTRING HERE TO CAP LARGE PARAGRAPHS
-            text: text.trim().substring(0, 3000), 
+            id: chunkId, // We send the stable ID to the worker
+            text: `Source: ${cleanPath}\nContent: ${text.substring(0, 3000)}`,
             lang: lang,
             path: cleanPath
           })
         });
 
         if (!response.ok) {
-          const errorText = await response.text();
-          console.error(`⚠️ Error in ${cleanPath}: ${response.status} - ${errorText}`);
+          console.error(`⚠️ Error on chunk ${i} of ${cleanPath}: ${response.status}`);
         }
       } catch (e) {
-        console.error(`❌ Network error on ${cleanPath}: ${e.message}`);
+        console.error(`❌ Network error: ${e.message}`);
       }
     }
   }
   
-  console.log("\n✨ Transformation complete. The AI is now a Sendai Guide expert.");
+  console.log("\n✨ Sync complete. Your AI Guide is now up to date with no duplicates.");
 }
 
 pump();

@@ -1,0 +1,27 @@
+name: Sync AI Guide
+on:
+  push:
+    branches:
+      - main  # Or whatever your primary branch is
+    paths:
+      - 'src/content/docs/**' # Only run when documentation changes
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Dependencies
+        run: npm install glob # Ensure the glob package is available
+
+      - name: Run Pump Script
+        run: node pump-guide.mjs
+        env:
+          # If your script requires authentication or specific URLs
+          WORKER_URL: ${{ secrets.WORKER_URL }}

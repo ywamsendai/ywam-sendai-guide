@@ -7,3 +7,10 @@ directory = "./dist"
 
 [observability]
 enabled = false
+
+[ai]
+binding = "AI"
+
+[[vectorize]]
+binding = "VECTORIZE"
+index_name = "sendai-guide-index"

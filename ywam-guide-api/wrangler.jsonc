@@ -12,7 +12,7 @@
 			"binding": "VECTORIZE",
 			"index_name": "ywam-guide-index",
 			"remote": true
-		}
+		},
 	],
 	"ai": {
 		"binding": "AI"
