@@ -3,10 +3,15 @@ interface Env {
   AI: Ai;
 }
 
+// Helper to format history into the chat structure
+interface Message {
+  role: 'system' | 'user' | 'assistant';
+  content: string;
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
-
     const corsHeaders = {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "POST, OPTIONS",
@@ -39,7 +44,7 @@ export default {
 
     if (url.pathname === "/ask" && request.method === "POST") {
       try {
-        const { question, lang } = await request.json() as { question: string; lang: string };
+        const { question, lang, history = [] } = await request.json() as { question: string; lang: string; history: { role: string, content: string }[] };
 
         const questionQuery = await env.AI.run('@cf/baai/bge-small-en-v1.5', { text: question }) as any;
         const vector = questionQuery.data[0];
@@ -59,42 +64,71 @@ export default {
         // 2. Define the Bilingual System Prompt
         const systemPrompt = lang === 'ja' 
           ? `あなたは親切で温かい YWAM Sendai（ワイワム仙台）のデジタルガイドです。
-             
-             ルール：
-             1. 提供された情報を基に、自然な日本語（です・ます調）で答えてください。
-             2. 「コンテキストに基づくと」や「ドキュメントによると」といった表現は使わないでください。
-             3. 答えが分からない場合は、公式LINE、またはメールでスタッフに問い合わせるよう丁寧に案内してください。
-             4. **太字**を使って重要な情報を強調してください。
-             5. スタッフ、生徒、訪問者、チームの申込フォーム（ビザ関連以外）を案内する場合は、[申込フォーム](/apply)を使用してください。
-             
-             情報：${context}`
-          : `You are the friendly, helpful YWAM Sendai Digital Assistant.
-             
-             RULES:
-             1. Use the provided information to answer, but speak naturally as a person.
-             2. Do NOT mention "the context," "the text," or "the documents." 
-             3. If you don't know the answer, politely suggest they contact us on Instagram, or email.
-             4. Use **bold** for emphasis. Use [Link Text](URL) for links.
-             5. If referring to the staff, student, visitor, or team application form (NOT visa related), use: [Application Form](/apply).
+     
+          ルール：
+          1. 回答はすべて日本語（です・ます調）で行ってください。英語を混ぜないでください。
+          2. 「コンテキストに基づくと」や「ドキュメントによると」といった表現は使わないでください。
+          3. **提供された「情報」だけを基に答えてください。** 情報にないことは「分かりません」と答え、公式LINE、またはメールでスタッフへの問い合わせを促してください。
+          4. 書式設定には標準のMarkdown構文を使用してください。強調したい箇所には**太字**を使用してください。リンクには[リンクテキスト](URL)を使用してください。
+          5. 申込フォーム（生徒・スタッフ・訪問者・チーム用）を案内する場合は、必ず [こちらの申込フォーム](/${lang}/apply) を案内してください。
+          
+          情報：${context}`
+        : `You are the friendly, helpful YWAM Sendai Digital Assistant.
+          
+          RULES:
+          1. Answer naturally but stay grounded in the facts provided.
+          2. Do NOT mention "the context," "the text," or "the documents." 
+          3. **ONLY use the provided INFORMATION to answer.** If the info is not there, say you don't know and suggest contacting a staff member via Instagram or email. Do NOT use outside knowledge.
+          4. Use standard Markdown syntax for formatting. Use **bold** for emphasis. Use [Link Text](URL) for links.
+          5. If referring to the application form (staff, student, visitor, or team), use: [Application Form](/${lang}/apply).
 
-             INFORMATION: ${context}`;
+          INFORMATION: ${context}`
+
+        const messages: Message[] = [
+          { role: 'system', content: systemPrompt },
+          ...history.map((m: any) => ({ role: m.role, content: m.content })),
+          { role: 'user', content: question }
+        ];
+
 
         // 3. The AI Run using the dynamic systemPrompt
         const aiResponse = await env.AI.run('@cf/meta/llama-3-8b-instruct', {
-          messages: [
-            { role: 'system', content: systemPrompt },
-            { role: 'user', content: question }
-          ],
-          stream: false,
+          messages: messages,
           max_tokens: 2048
         }) as any;
 
-        let answer = aiResponse?.response || "";
+        console.log("--- CONTEXT SENT TO AI ---");
+        console.log(context); 
+        console.log("--------------------------");
 
-        if (!answer) {
+        let answer = "";
+
+if (aiResponse) {
+  if (typeof aiResponse === 'string') {
+    answer = aiResponse;
+  } else if (aiResponse.response) {
+    answer = aiResponse.response;
+  } else if (aiResponse.answer) {
+    answer = aiResponse.answer;
+  } else if (Array.isArray(aiResponse) && aiResponse[0]?.response) {
+    answer = aiResponse[0].response;
+  }
+}
+
+        if (aiResponse && typeof aiResponse === 'object') {
+          answer = aiResponse.response || aiResponse.answer || "";
+        }
+
+        if (!answer.trim()) {
+          if (context.trim().length === 0) {
+            answer = lang === 'ja' 
+              ? "申し訳ありません。その質問に関する情報がハンドブック内に見つかりませんでした。具体的な費用や日程について聞いてみてください。" 
+              : "I'm sorry, I couldn't find information about that in our guide. Try asking specifically about costs, dates, or our programs.";
+          } else {
             answer = lang === 'ja' 
               ? "申し訳ありません。回答を生成できませんでした。もう一度質問を変えてみてください。" 
               : "I processed your request but couldn't generate a specific answer. Could you try rephrasing your question?";
+          }
         }
 
         return new Response(JSON.stringify({ answer: answer }), {
