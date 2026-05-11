@@ -86,15 +86,15 @@ export default {
 
         const messages: Message[] = [
           { role: 'system', content: systemPrompt },
-          ...history.map((m: any) => ({ role: m.role, content: m.content })),
+          ...history.slice(-2).map((m: any) => ({ role: m.role, content: m.content })),
           { role: 'user', content: question }
         ];
 
 
         // 3. The AI Run using the dynamic systemPrompt
-        const aiResponse = await env.AI.run('@cf/meta/llama-3-8b-instruct', {
+        const aiResponse = await env.AI.run('@cf/meta/llama-3.2-1b-instruct', {
           messages: messages,
-          max_tokens: 2048
+          max_tokens: 1024
         }) as any;
 
         console.log("--- CONTEXT SENT TO AI ---");
@@ -135,12 +135,15 @@ if (aiResponse) {
           headers: { ...corsHeaders, 'Content-Type': 'application/json' }
         });
 
-      } catch (err: any) {
-        return new Response(JSON.stringify({ answer: `Error: ${err.message}` }), { 
-          status: 500, 
-          headers: corsHeaders 
-        });
-      }
+        } catch (err: any) {
+          console.error("WORKER_ERROR:", err.message); // This will show up in the Logs tab
+          return new Response(JSON.stringify({ 
+            answer: "I'm having trouble connecting to my brain right now. Please try again in a minute!" 
+          }), { 
+            status: 200, // Returning 200 keeps the frontend from showing "Connection Error"
+            headers: corsHeaders 
+          });
+        }
     }
 
     return new Response("Not Found", { status: 404, headers: corsHeaders });
