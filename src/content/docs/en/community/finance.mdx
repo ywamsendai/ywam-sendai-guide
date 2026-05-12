@@ -2,7 +2,7 @@
 title: Payments & Giving
 description: How to send tuition, staff fees, or donations to YWAM Sendai.
 sidebar:
-  order: 6
+  order: 3
 ---
 
 import { Aside, Steps, Card, CardGrid, LinkButton } from '@astrojs/starlight/components';
@@ -11,30 +11,27 @@ Whether you are paying tuition, contributing staff fees, or giving toward the vi
 
 ---
 
-## 1. International Payments (via Wise)
-For those outside of Japan, we recommend **Wise** as the most cost-effective and reliable method. 
+## 1. International Payments (Outside Japan via Wise)
+For those outside of Japan, we recommend **Wise** as the most cost-effective method. 
 
-<Aside type="danger" title="Important">
-We cannot receive direct international wire transfers to this account. You **must** use the Wise app or website to initiate the transfer.
+<Aside type="danger" title="No Direct Wire Transfers">
+We cannot receive direct international wire transfers. You **must** use the Wise app or website. Wise converts your currency into Yen (JPY) locally before sending it to us.
 </Aside>
 
-**Recipient Details:**
+**Recipient Details for Wise:**
 * **Recipient Type:** Business / Charity
-* **Account Name:** セカイセイネンセンキョウカイ
+* **Account Name:** セカイセイネンセンキョウカイ (Sekai Seinen Senkyoukai)
 * **Bank Name:** [0310] GMO Aozora Net Bank
 * **Branch:** [101] Houjin
 * **Account Type:** Savings (Futsuu)
 * **Account Number:** 2042380
 * **Email:** finance@ywamsendai.org
-* **Country:** Japan
-* **City:** Osaka
-* **Recipient address:** 2-15-3 Kanmakicho, Takatsuki
-* **Post Code:** 569-0003
+* **Address:** 2-15-3 Kanmakicho, Takatsuki, Osaka, 569-0003
 
 ---
 
-## 2. Domestic Payments (Within Japan)
-If you are already in Japan or have a local bank account, you may use our Japan Post (Yucho) details.
+## 2. Domestic Payments (Within Japan via Bank Transfer)
+If you are already in Japan or have a Japan Post account, use these details for "Furikomi" (Bank Transfer).
 
 **Japan Post Bank (ゆうちょ銀行):**
 * **Symbol (Kigo):** 10140
@@ -42,42 +39,43 @@ If you are already in Japan or have a local bank account, you may use our Japan 
 * **Name:** セカイセイネンセンキョウカイ
 
 <Steps>
-1. **At the ATM:** Select "English" > "Remittance."
+1. **At the ATM:** Select "English" > "Remittance" (送金).
 2. **Enter Details:** Input the Kigo (10140) and Bango (65305041).
 3. **Confirm:** Verify the name appears as "セカイセイネンセンキョウカイ."
-4. **Save:** We recommend saving this account for future monthly fees or donations.
 </Steps>
 
 ---
 
-## 3. Alternative Methods (Credit Card & PayPal)
-If Wise or Bank Transfer are unavailable, you can use the following links. 
+## 3. How to Withdraw Cash in Japan (For Housing & Outreach)
+As noted in the School Finance guide, accommodation and outreach fees must be paid in **Cash (JPY)**. Japan is still a cash-heavy society.
 
-<Aside type="caution">
-Please note: These methods incur significantly higher processing fees (approx. 4%) and less favorable exchange rates. We recommend **Wise** for the best stewardship of your funds.
+**Recommended Methods for International Travelers:**
+1. **7-Eleven ATMs (7-Bank):** These are the most reliable for foreign debit/credit cards. They are open 24/7 and have a full English interface.
+2. **Japan Post ATMs:** Located in most post offices, these also reliably accept international cards (Visa, Plus, Mastercard, Maestro).
+
+<Aside type="tip" title="Daily Limits">
+Most Japanese ATMs have a 100,000 JPY daily withdrawal limit. If you need to pay 120,000 JPY for housing, you may need to withdraw over two separate days. **Notify your home bank** before traveling to ensure your card is active for Japan.
 </Aside>
+
+---
+
+## 4. Alternative Methods (Credit Card & PayPal)
+Use these links if Wise or Bank Transfers are unavailable. Note the higher fees (approx. 4%).
 
 <CardGrid>
   <Card title="Credit Card" icon="external">
-    Processed via Stripe. Best for quick, one-time registration fees.
+    Processed via Stripe. Best for quick registration fees.
     <br />
-    <LinkButton href="https://buy.stripe.com/28EaEZgJcgATdIrer82Fa00" variant="primary">
-      Pay by Credit Card
-    </LinkButton>
+    <LinkButton href="https://buy.stripe.com/28EaEZgJcgATdIrer82Fa00" variant="primary">Pay by Credit Card</LinkButton>
   </Card>
   <Card title="PayPal" icon="external">
-    Use your existing PayPal balance or linked bank account.
+    Use your existing PayPal balance.
     <br />
-    <LinkButton href="https://www.paypal.com/ncp/payment/F2BWGTCV6H9P2" variant="secondary">
-      Pay via PayPal
-    </LinkButton>
+    <LinkButton href="https://www.paypal.com/ncp/payment/F2BWGTCV6H9P2" variant="secondary">Pay via PayPal</LinkButton>
   </Card>
 </CardGrid>
 
 ---
 
-## 4. Notification of Transfer
-To help our finance team track your payment, please send a quick email to **finance@ywamsendai.org** with:
-* The Date
-* The Amount
-* The Purpose (e.g., "DTS Tuition," "Staff Fees," or "Property Fund Donation")
+## 5. Notification of Transfer
+To help our finance team track your payment, please email **finance@ywamsendai.org** with the Date, Amount, and Purpose (e.g., "DTS Tuition").
