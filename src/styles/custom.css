@@ -25,15 +25,27 @@
 
 /* Force Dark Mode variables even if the system prefers light */
 :root,
-[data-theme='light'] {
+html[data-theme='light'],
+html[data-theme='dark'],
+[data-theme='light'],
+[data-theme='dark'] {
   --sl-color-bg: #050505 !important;
+  --sl-color-bg-nav: #050505 !important;
+  --sl-color-bg-sidebar: #050505 !important;
   --sl-color-white: #ffffff !important;
   --sl-color-gray-1: #eeeeee !important;
   --sl-color-gray-2: #c2c2c2 !important;
   --sl-color-gray-3: #8b8b8b !important;
+  --sl-color-gray-4: #525252 !important;
+  --sl-color-gray-5: #262626 !important;
+  --sl-color-gray-6: #171717 !important;
   --sl-color-accent: #c5a059 !important;
   --sl-color-accent-high: #e2c284 !important;
   --sl-color-accent-low: #1a1a1a !important;
+  --pagefind-ui-background: #0a0a0a !important;
+  --pagefind-ui-text: #eeeeee !important;
+  --pagefind-ui-primary: #c5a059 !important;
+  --pagefind-ui-border: rgba(197, 160, 89, 0.2) !important;
 }
 
 /* Hide the toggle entirely so no one can even try to switch */

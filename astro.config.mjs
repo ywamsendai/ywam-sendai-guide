@@ -12,6 +12,11 @@ export default defineConfig({
   integrations: [starlight({
     title: 'YWAM Sendai Guide',
     defaultLocale: 'en',
+    expressiveCode: {
+      themes: ['github-dark'], // Forces code blocks to stay dark
+      useVariableFonts: true,
+    },
+    credits: false,
     locales: {
       en: { label: 'English', lang: 'en' },
       ja: { label: '日本語', lang: 'ja' },
