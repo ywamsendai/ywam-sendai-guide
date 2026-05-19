@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel&family=Inter:wght@300;600&display=swap');
 
+/* ==========================================================================
+   1. CORE THEME CONSTANTS & FORCED VARIANT CLAMPING
+   ========================================================================== */
 :root {
   /* The Core "Vibe" Colors */
   --sl-color-bg: #050505;        /* Your dark background */
@@ -15,15 +18,13 @@
   --sl-color-gray-4: #525252;
   --sl-color-gray-5: #262626;
   --sl-color-gray-6: #171717;
-}
 
-/* 2. Typography: Bringing in the Monastic Serifs */
-:root {
+  /* Typography */
   --sl-font-system: 'Inter', sans-serif;
   --sl-font-heading: 'Cinzel', serif; /* Matching your main site headings */
 }
 
-/* Force Dark Mode variables even if the system prefers light */
+/* Force Dark Mode variables even if the device system prefers light */
 :root,
 html[data-theme='light'],
 html[data-theme='dark'],
@@ -42,18 +43,24 @@ html[data-theme='dark'],
   --sl-color-accent: #c5a059 !important;
   --sl-color-accent-high: #e2c284 !important;
   --sl-color-accent-low: #1a1a1a !important;
+  
+  /* Pagefind UI Variables */
   --pagefind-ui-background: #0a0a0a !important;
   --pagefind-ui-text: #eeeeee !important;
   --pagefind-ui-primary: #c5a059 !important;
   --pagefind-ui-border: rgba(197, 160, 89, 0.2) !important;
 }
 
-/* Hide the toggle entirely so no one can even try to switch */
-starlight-theme-select {
+/* Hide the theme toggle entirely so no one can even try to switch */
+starlight-theme-select,
+.type-select {
   display: none !important;
 }
 
-/* 3. Subtle Aesthetic Tweaks */
+
+/* ==========================================================================
+   2. GLOBAL AESTHETIC TWEAKS (HEADER, SIDEBAR, TYPOGRAPHY)
+   ========================================================================== */
 
 /* Make the header translucent like your Vibe nav */
 .header {
@@ -65,6 +72,32 @@ starlight-theme-select {
 /* Clean up the sidebar to feel more like a "Portal" */
 .sidebar-content {
   background-color: #050505 !important;
+}
+
+/* Make sidebar links feel more elegant */
+.sidebar-content a {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  color: var(--sl-color-gray-3) !important;
+  transition: color 0.2s ease;
+}
+
+/* Highlight the active page in Gold */
+.sidebar-content a[aria-current="page"] {
+  color: var(--sl-color-accent) !important;
+  font-weight: 500;
+  background-color: rgba(197, 160, 89, 0.05) !important;
+}
+
+/* Style the sidebar group labels (e.g., "1. FOUNDATIONS") */
+.sidebar-content .group-label {
+  font-family: 'Cinzel', serif;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-size: 0.75rem;
+  color: var(--sl-color-gray-4) !important;
+  margin-top: 1.5rem;
 }
 
 /* Make links feel more "Gold" and less "Web" */
@@ -87,7 +120,7 @@ a {
   font-size: 0.7rem;
 }
 
-/* Make the main typography feel "Monastic" */
+/* Make the main markdown typography feel "Monastic" */
 .sl-markdown-content {
   font-family: 'Inter', sans-serif;
   font-weight: 300;
@@ -106,6 +139,20 @@ a {
   font-weight: 400;
 }
 
+.content-panel h1 {
+  font-family: 'Cinzel', serif !important;
+  color: #c5a059 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 400;
+  margin-bottom: .5rem;
+}
+
+/* Tighten the top padding structure */
+.sl-container {
+  padding-top: .5rem !important;
+}
+
 /* Add a subtle gold left-border to blockquotes for emphasized vision points */
 .sl-markdown-content blockquote {
   border-inline-start: 1px solid var(--sl-color-accent);
@@ -114,7 +161,10 @@ a {
   font-style: italic;
 }
 
-/* src/styles/custom.css */
+
+/* ==========================================================================
+   3. LANDING HERO & FOOTER CUSTOM BRANDING
+   ========================================================================== */
 
 /* Center the Hero text now that the logo is gone */
 .hero {
@@ -124,6 +174,23 @@ a {
   align-items: center;
   min-height: 60vh; /* Gives the text room to breathe */
   text-align: center;
+}
+
+.hero-title {
+  font-family: 'Cinzel', serif !important;
+  letter-spacing: 0.4em !important;
+  text-transform: uppercase;
+  color: var(--sl-color-accent) !important; /* Gold Title */
+  margin-bottom: 1rem;
+}
+
+.tagline {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.05em;
+  color: var(--sl-color-gray-2) !important;
+  max-width: 30ch; /* Keeps the text from stretching too wide */
 }
 
 /* Create the Branded Footer */
@@ -151,89 +218,10 @@ footer::before {
   filter: grayscale(1) brightness(1.5); /* Makes it feel like part of the stone/paper */
 }
 
-.hero-title {
-  font-family: 'Cinzel', serif !important;
-  letter-spacing: 0.4em !important;
-  text-transform: uppercase;
-  color: var(--sl-color-accent) !important; /* Gold Title */
-  margin-bottom: 1rem;
-}
 
-.tagline {
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  font-style: italic;
-  letter-spacing: 0.05em;
-  color: var(--sl-color-gray-2) !important;
-  max-width: 30ch; /* Keeps the text from stretching too wide */
-}
-
-/* Hide the Dark/Light theme toggle */
-.type-select, 
-starlight-theme-select {
-  display: none !important;
-}
-
-/* --- High-Priority Search Styling --- */
-
-/* Target the actual button inside the search container */
-:is([data-theme]) #starlight__search button {
-  background-color: transparent !important;
-  border: 1px solid rgba(197, 160, 89, 0.25) !important;
-  border-radius: 4px !important;
-  padding: 0.5rem 1rem !important;
-  color: var(--sl-color-gray-2) !important;
-  box-shadow: none !important;
-}
-
-/* Hover state: Brighten the gold border */
-:is([data-theme]) #starlight__search button:hover {
-  border-color: var(--sl-color-accent) !important;
-  background-color: rgba(197, 160, 89, 0.03) !important;
-}
-
-/* Hide the "Ctrl K" / "⌘ K" keyboard shortcut label */
-:is([data-theme]) #starlight__search kbd {
-  display: none !important;
-}
-
-/* Change the magnifying glass icon to your Gold */
-:is([data-theme]) #starlight__search .sl-icon {
-  color: var(--sl-color-accent) !important;
-}
-
-/* Optional: Hide the word "Search" to make it look even more monastic/minimal */
-/*
-:is([data-theme]) #starlight__search .label {
-  display: none !important;
-}
-*/
-
-/* Make sidebar links feel more elegant */
-.sidebar-content a {
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  letter-spacing: 0.02em;
-  color: var(--sl-color-gray-3) !important;
-  transition: color 0.2s ease;
-}
-
-/* Highlight the active page in Gold */
-.sidebar-content a[aria-current="page"] {
-  color: var(--sl-color-accent) !important;
-  font-weight: 500;
-  background-color: rgba(197, 160, 89, 0.05) !important;
-}
-
-/* Style the sidebar group labels (e.g., "VISION") */
-.sidebar-content .group-label {
-  font-family: 'Cinzel', serif;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  font-size: 0.75rem;
-  color: var(--sl-color-gray-4) !important;
-  margin-top: 1.5rem;
-}
+/* ==========================================================================
+   4. LAYOUT ANIMATION MODIFICATIONS
+   ========================================================================== */
 
 /* Kill the old stuttery animation */
 main { animation: none !important; }
@@ -250,10 +238,15 @@ main { animation: none !important; }
   to { opacity: 1; }
 }
 
-/* --- Community "Stone Tablet" Cards --- */
 
-/* The Card Container */
-.sl-card {
+/* ==========================================================================
+   5. STARLIGHT COMPONENT OVERRIDES (CARDS, STEPS, TIMELINES)
+   ========================================================================== */
+
+/* The Card Container - "Stone Tablet" look */
+.sl-card,
+:is([data-theme="light"]) .sl-card,
+:is([data-theme="light"]) .card {
   background-color: #0a0a0a !important; /* Slightly lighter than the #050505 background */
   border: 1px solid rgba(197, 160, 89, 0.15) !important; /* Faint gold border */
   border-radius: 2px !important; /* Sharp, architectural corners */
@@ -276,7 +269,8 @@ main { animation: none !important; }
 }
 
 /* The Card Title (The "Way") */
-.sl-card .title {
+.sl-card .title,
+:is([data-theme="light"]) .sl-card .title {
   font-family: 'Cinzel', serif !important;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -285,7 +279,8 @@ main { animation: none !important; }
 }
 
 /* The Card Body (The Description) */
-.sl-card .description {
+.sl-card .description,
+:is([data-theme="light"]) .sl-card .description {
   font-family: 'Inter', sans-serif;
   font-weight: 300;
   line-height: 1.6;
@@ -315,19 +310,63 @@ main { animation: none !important; }
   letter-spacing: 0.05em;
 }
 
-.content-panel h1 {
-  font-family: 'Cinzel', serif !important;
-  color: #c5a059 !important;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-weight: 400;
-  margin-bottom: .5rem;
+
+/* ==========================================================================
+   6. HIGH-PRIORITY SEARCH & MOBILE PLATFORM OVERRIDES (PAGEFIND)
+   ========================================================================== */
+
+/* Target the actual desktop button inside the search container */
+:is([data-theme]) #starlight__search button {
+  background-color: transparent !important;
+  border: 1px solid rgba(197, 160, 89, 0.25) !important;
+  border-radius: 4px !important;
+  padding: 0.5rem 1rem !important;
+  color: var(--sl-color-gray-2) !important;
+  box-shadow: none !important;
 }
 
-/* 
-   If the auto-header feels too far from the top after removing 
-   your manual one, you can tighten the padding here:
-*/
-.sl-container {
-  padding-top: .5rem !important;
+/* Hover state: Brighten the gold border */
+:is([data-theme]) #starlight__search button:hover {
+  border-color: var(--sl-color-accent) !important;
+  background-color: rgba(197, 160, 89, 0.03) !important;
+}
+
+/* Hide the "Ctrl K" / "⌘ K" keyboard shortcut label */
+:is([data-theme]) #starlight__search kbd {
+  display: none !important;
+}
+
+/* Change the magnifying glass icon to your Gold */
+:is([data-theme]) #starlight__search .sl-icon {
+  color: var(--sl-color-accent) !important;
+}
+
+/* Force the dynamic search modal and mobile text container background dark */
+div[style*="--pagefind-ui-background"],
+.pagefind-ui,
+#starlight__search,
+.pagefind-ui__modal,
+.pagefind-ui__drawer,
+.pagefind-ui__search-container {
+  --pagefind-ui-background: #0a0a0a !important;
+  --pagefind-ui-text: #eeeeee !important;
+  --pagefind-ui-border: rgba(197, 160, 89, 0.2) !important;
+  background-color: #0a0a0a !important;
+}
+
+/* Target the search input element text box explicitly on mobile viewports */
+.pagefind-ui__search-input,
+input.pagefind-ui__search-input,
+#starlight__search input {
+  background-color: #121212 !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(197, 160, 89, 0.3) !important;
+}
+
+/* Ensure the dynamic results list elements remain legible in search context */
+.pagefind-ui__result-link {
+  color: #c5a059 !important;
+}
+.pagefind-ui__result-excerpt {
+  color: #c2c2c2 !important;
 }

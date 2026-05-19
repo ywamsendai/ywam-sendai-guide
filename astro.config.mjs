@@ -33,6 +33,25 @@ export default defineConfig({
       },
       ],
       head: [
+        {
+        tag: 'script',
+        content: `
+          // Force data-theme attribute state globally
+          document.documentElement.setAttribute('data-theme', 'dark');
+          
+          // Intercept Starlight's mutation observers trying to toggle back to light mode
+          const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+              if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+                if (document.documentElement.getAttribute('data-theme') === 'light') {
+                  document.documentElement.setAttribute('data-theme', 'dark');
+                }
+              }
+            });
+          });
+          observer.observe(document.documentElement, { attributes: true });
+        `,
+      },
     {
       tag: 'meta',
       attrs: { property: 'og:image', content: 'https://guide.ywamsendai.org/og-image.jpg' },
