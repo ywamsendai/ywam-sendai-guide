@@ -17,6 +17,7 @@
     "astro": "^6.0.1",
     "fs": "^0.0.1-security",
     "glob": "^13.0.6",
+    "gray-matter": "^4.0.3",
     "path": "^0.12.7",
     "sharp": "^0.34.2",
     "tailwindcss": "^4.2.2"

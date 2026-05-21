@@ -1,27 +1,60 @@
 name: Sync AI Guide
+
 on:
   push:
     branches:
-      - main  # Or whatever your primary branch is
+      - main
     paths:
-      - 'src/content/docs/**' # Only run when documentation changes
+      - 'src/content/docs/*'
+      - 'scripts/ingest.mjs'
+
+concurrency:
+  group: sync-ai-guide
+  cancel-in-progress: true
 
 jobs:
   sync:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+    timeout-minutes: 15
 
-      - name: Install Node.js
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
 
-      - name: Install Dependencies
-        run: npm install glob # Ensure the glob package is available
+      - name: Install dependencies
+        run: npm ci
 
-      - name: Run Pump Script
-        run: node pump-guide.mjs
+      - name: Get changed documentation files
+        id: changed-files
+        shell: bash
+        run: |
+          CHANGED_FILES=$(git diff --name-only HEAD^ HEAD | grep '^src/content/docs/.\.$md\|mdx$$' | grep -v '/index\.mdx$' || true)
+          echo "changed_files<<EOF" >> $GITHUB_OUTPUT
+          echo "$CHANGED_FILES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Show changed files
+        run: |
+          echo "Changed files:"
+          echo "${{ steps.changed-files.outputs.changed_files }}"
+
+      - name: Run ingestion for changed files
+        if: steps.changed-files.outputs.changed_files != ''
+        shell: bash
         env:
-          # If your script requires authentication or specific URLs
           WORKER_URL: ${{ secrets.WORKER_URL }}
+        run: |
+          mapfile -t files <<< "${{ steps.changed-files.outputs.changed_files }}"
+          node scripts/ingest.mjs "${files[@]}"
+
+      - name: No eligible files changed
+        if: steps.changed-files.outputs.changed_files == ''
+        run: echo "No eligible documentation files changed."

@@ -63,48 +63,89 @@ export default defineConfig({
   ],
     sidebar: [
       {
-        label: '1. Foundations',
-        translations: { 'ja': '1. 基盤（ファウンデーション）' },
-        autogenerate: { directory: 'foundations' },
+        label: 'About',
+        translations: { 'ja': 'について' },
+        autogenerate: { directory: 'about' },
       },
       {
-        label: '2. Community Life',
-        translations: { 'ja': '2. 共同体生活' },
+        label: 'Community',
+        translations: { 'ja': 'コミュニティー' },
         autogenerate: { directory: 'community' },
       },
       {
-        label: '3. Training',
-        translations: { 'ja': '3. 訓練' },
-        autogenerate: { directory: 'training' },
+        label: 'Schools',
+        translations: { 'ja': '学校' },
+        autogenerate: { directory: 'schools' },
       },
       {
-        label: '4. Your Role',
-        translations: { 'ja': '4. あなたの役割' },
+        label: 'Wellbeing',
+        translations: { 'ja': '福祉' },
+        autogenerate: { directory: 'wellbeing' },
+      },
+      {
+        label: 'Your Role',
+        translations: { 'ja': 'あなたの役割' },
         items: [
           { 
-            label: 'Staff Portal', 
-            translations: { 'ja': 'スタッフ・ポータル' },
+            label: 'Staff', 
+            translations: { 'ja': 'スタッフ' },
             autogenerate: { directory: 'roles/staff' },
             collapsed: true 
           },
           { 
-            label: 'Student Portal', 
-            translations: { 'ja': '生徒・ポータル' },
+            label: 'Students', 
+            translations: { 'ja': '生徒' },
             autogenerate: { directory: 'roles/students' },
             collapsed: true 
           },
           { 
-            label: 'Short-term Portal', 
-            translations: { 'ja': '短期・ポータル' },
+            label: 'Short-term', 
+            translations: { 'ja': '短期' },
             autogenerate: { directory: 'roles/short-term' },
             collapsed: true 
           },
         ],
       },
       {
-        label: '5. Operations',
-        translations: { 'ja': '5. オペレーション' },
-        autogenerate: { directory: 'operations' },
+        label: 'Apply',
+        translations: { 'ja': '応募' },
+        autogenerate: { directory: 'apply' },
+        collapsed: true,
+      },
+      {
+        label: 'Finance',
+        translations: { 'ja': '財務' },
+        autogenerate: { directory: 'finance' },
+        collapsed: true,
+      },
+      {
+        label: 'Giving',
+        translations: { 'ja': '寄付' },
+        autogenerate: { directory: 'giving' },
+        collapsed: true,
+      },
+      {
+        label: 'Contact',
+        translations: { 'ja': 'お問い合わせ' },
+        autogenerate: { directory: 'contact' },
+        collapsed: true,
+      },
+      {
+        label: 'History',
+        translations: { 'ja': '歴史' },
+        autogenerate: { directory: 'history' },
+        collapsed: true,
+      },
+      {
+        label: 'YWAM Global',
+        translations: { 'ja': 'YWAM Global' },
+        autogenerate: { directory: 'ywam' },
+        collapsed: true,
+      },
+      {
+        label: 'Appendix',
+        translations: { 'ja': '付録' },
+        autogenerate: { directory: 'appendix' },
         collapsed: true,
       },
     ],

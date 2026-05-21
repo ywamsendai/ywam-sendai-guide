@@ -7,10 +7,3 @@ directory = "./dist"
 
 [observability]
 enabled = false
-
-[ai]
-binding = "AI"
-
-[[vectorize]]
-binding = "VECTORIZE"
-index_name = "ywam-guide-index"
