@@ -133,7 +133,7 @@ YWAM仙台では、スタッフが経済面に対して、次のような姿勢�
 ## Related pages
 
 - [サポート形成とパートナーシップ](../support-development-and-partnership)
-- [スタッフの法的・事務的責任](../legal-and-administrative-responsibilities)
+- [スタッフの法的・事務的責任](../legal-responsibilities)
 - [スタッフの在留資格・各種手続き](../visa-and-immigration)
 - [スタッフの応募条件と前提事項](../eligibility-and-prerequisites)
 - [スタッフ応募と受け入れ準備](../application-and-onboarding)

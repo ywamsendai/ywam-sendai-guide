@@ -140,7 +140,7 @@ YWAM仙台では、スタッフの国や居住地、サポートの形、事務�
 ## Related pages
 
 - [スタッフのサポートと経済的準備](../support-and-finances)
-- [スタッフの法的・事務的責任](../legal-and-administrative-responsibilities)
+- [スタッフの法的・事務的責任](../legal-responsibilities)
 - [スタッフの在留資格・各種手続き](../visa-and-immigration)
 - [スタッフ応募と受け入れ準備](../application-and-onboarding)
 - [支払い方法](../../../finance/payment-methods)

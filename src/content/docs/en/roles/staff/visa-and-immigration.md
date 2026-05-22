@@ -101,7 +101,7 @@ YWAM Sendai guidance should be treated as supportive and practical, but not as a
 ## Related pages
 
 - [Staff Support and Finances](../support-and-finances)
-- [Staff Legal and Administrative Responsibilities](../legal-and-administrative-responsibilities)
+- [Staff Legal and Administrative Responsibilities](../legal-responsibilities)
 - [Staff Visa Application (CoE)](../visa-application-coe)
 - [Staff Visa Renewal and Extension](../visa-renewal-and-extension)
 - [Staff Application and Onboarding](../application-and-onboarding)

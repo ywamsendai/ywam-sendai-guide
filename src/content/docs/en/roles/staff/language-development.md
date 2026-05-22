@@ -108,4 +108,4 @@ It reflects a commitment to:
 - [Staff Eligibility and Prerequisites](../eligibility-and-prerequisites)
 - [Staff Application and Onboarding](../application-and-onboarding)
 - [Community Rhythms](../../../community/community-rhythms)
-- [Rule of Life](../../../community/community-standards-and-commitments)
+- [Community Standards and Commitments](../../../community/community-standards-and-commitments)

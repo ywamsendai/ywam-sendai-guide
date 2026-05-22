@@ -130,7 +130,7 @@ Long-term sustainability requires continued communication, stewardship, and rela
 ## Related pages
 
 - [Staff Support and Finances](../support-and-finances)
-- [Staff Legal and Administrative Responsibilities](../legal-and-administrative-responsibilities)
+- [Staff Legal and Administrative Responsibilities](../legal-responsibilities)
 - [Staff Visa and Immigration](../visa-and-immigration)
 - [Staff Application and Onboarding](../application-and-onboarding)
 - [Payment Methods](../../../finance/payment-methods)

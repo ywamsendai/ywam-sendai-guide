@@ -122,7 +122,7 @@ YWAM仙台からの案内は、実務的で補助的な助けとして受け取�
 ## Related pages
 
 - [スタッフのサポートと経済的準備](../support-and-finances)
-- [スタッフの法的・事務的責任](../legal-and-administrative-responsibilities)
+- [スタッフの法的・事務的責任](../legal-responsibilities)
 - [スタッフの在留資格申請（CoE）](../visa-application-coe)
 - [スタッフの在留資格更新・延長](../visa-renewal-and-extension)
 - [スタッフ応募と受け入れ準備](../application-and-onboarding)

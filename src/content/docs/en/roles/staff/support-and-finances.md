@@ -123,7 +123,7 @@ This includes:
 ## Related pages
 
 - [Support Development and Partnership](../support-development-and-partnership)
-- [Staff Legal and Administrative Responsibilities](../legal-and-administrative-responsibilities)
+- [Staff Legal and Administrative Responsibilities](../legal-responsibilities)
 - [Staff Visa and Immigration](../visa-and-immigration)
 - [Staff Eligibility and Prerequisites](../eligibility-and-prerequisites)
 - [Staff Application and Onboarding](../application-and-onboarding)

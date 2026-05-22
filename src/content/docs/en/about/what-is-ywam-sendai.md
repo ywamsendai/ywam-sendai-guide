@@ -88,5 +88,5 @@ YWAM Sendai is shaped by its long-term commitment to the Tohoku region. Its iden
 
 - [Vision and Mission](../vision-and-mission)
 - [The Tohoku Mandate](../tohoku-mandate)
-- [Rule of Life](../../community/community-standards-and-commitments)
+- [Community Standards and Commitments](../../community/community-standards-and-commitments)
 - [Training Overview](../../schools/training-overview)

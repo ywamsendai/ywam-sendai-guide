@@ -308,7 +308,7 @@ YWAM仙台では、ミッション生活における長期的な持続可能性�
 - [スタッフ応募と受け入れ準備](../application-and-onboarding)
 - [スタッフの言語習得](../language-development)
 - [スタッフのサポートと経済的準備](../support-and-finances)
-- [スタッフの法的・事務的責任](../legal-and-administrative-responsibilities)
+- [スタッフの法的・事務的責任](../legal-responsibilities)
 - [スタッフの在留資格・各種手続き](../visa-and-immigration)
 - [コミュニティ基準とコミットメント](../../../community/community-standards-and-commitments)
 - [コミュニティのリズム](../../../community/community-rhythms)

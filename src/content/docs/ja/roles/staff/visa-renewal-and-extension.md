@@ -104,6 +104,6 @@ YWAM仙台が補助書類の準備などで実務的な助けをすることは�
 ## Related pages
 
 - [スタッフの在留資格・入国手続き](../visa-and-immigration)
-- [スタッフの法的・事務的責任](../legal-and-administrative-responsibilities)
+- [スタッフの法的・事務的責任](../legal-responsibilities)
 - [スタッフのサポートと経済的準備](../support-and-finances)
 - [スタッフ応募と受け入れ準備](../application-and-onboarding)
