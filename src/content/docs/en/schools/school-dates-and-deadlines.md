@@ -36,7 +36,7 @@ Students should use the most current version of this page when planning an appli
 | Arrival Day | September 24, 2026 |
 | Lecture Phase Starts | September 25, 2026 |
 | Outreach Phase Starts | December 21, 2026 |
-| Graduation Day | February 19, 2027 |
+| Graduation Day | March 5, 2027 |
 
 ### Application deadlines
 
