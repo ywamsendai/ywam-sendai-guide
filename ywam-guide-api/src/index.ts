@@ -44,6 +44,13 @@ interface ManifestRecord {
   lang: string;
 }
 
+interface SourceLink {
+  title: string;
+  path: string;
+  url: string;
+  type: 'doc';
+}
+
 type MatchMetadata = {
   text?: string;
   lang?: string;
@@ -68,6 +75,13 @@ const corsHeaders = {
 
 const EMBEDDING_MODEL = '@cf/baai/bge-m3';
 const CHAT_MODEL = '@cf/meta/llama-3.1-8b-instruct';
+const DOCS_BASE_URL = 'https://guide.ywamsendai.org';
+
+function toDocUrl(path?: string): string {
+  if (!path) return DOCS_BASE_URL;
+  if (path.startsWith('http://') || path.startsWith('https://')) return path;
+  return `${DOCS_BASE_URL}${path.startsWith('/') ? path : `/${path}`}`;
+}
 
 function manifestKey(path: string, lang: string): string {
   return `manifest:${lang}:${path}`;
@@ -119,8 +133,6 @@ async function deleteManifest(env: Env, path: string, lang: string): Promise<voi
 async function deleteVectorIds(env: Env, ids: string[]): Promise<void> {
   if (!ids.length) return;
 
-  // Cloudflare Vectorize commonly uses deleteByIds(ids)
-  // If your local typings complain, this cast avoids TS issues while preserving runtime behavior.
   await (env.VECTORIZE as any).deleteByIds(ids);
 }
 
@@ -225,7 +237,6 @@ function buildContext(matches: Array<{ metadata?: MatchMetadata }>): string {
       return [
         `SOURCE ${i + 1}`,
         `Title: ${safeString(md.title)}`,
-        `Path: ${safeString(md.path)}`,
         `Section: ${safeString(md.section)}`,
         `Audience: ${safeString(md.audience)}`,
         `Content Type: ${safeString(md.content_type)}`,
@@ -247,9 +258,11 @@ function buildSystemPrompt(lang: string, context: string): string {
 3. 情報にないことは、分からないと正直に伝えてください。
 4. 「コンテキストによると」「資料によると」などの言い方は使わないでください。
 5. 推測で断定しないでください。
-6. 必要に応じて、関連する内部ページへの案内をしてください。
-7. 申込フォームを案内する場合は、必ずこちらの [申込フォーム](/ja/apply) を使ってください。
-8. 書式はMarkdownを使い、必要な箇所は太字で分かりやすくしてください。
+6. 必要に応じて、ユーザーの次の行動に役立つ案内をしてください。
+7. 申込フォームを案内する場合は、必ずこの正確なリンクを使ってください: [申込フォーム](https://ywamsendai.org/ja/apply)
+8. ハンドブックのURLを推測・生成・出力しないでください。ハンドブックへの参照リンクは別途提供されます。
+9. donate や contact のリンクは、正確な承認済みリンクがある場合のみ案内してください。
+10. 書式はMarkdownを使い、必要な箇所は太字で分かりやすくしてください。
 
 情報:
 ${context}`;
@@ -263,9 +276,11 @@ RULES:
 3. If the answer is not in the provided information, say you do not know rather than guessing.
 4. Do not mention "the context," "the documents," or "the provided information."
 5. Do not use outside knowledge.
-6. When helpful, point the user to a relevant internal page.
-7. If referring to the application form, always use [Application Form](/en/apply).
-8. Use Markdown formatting clearly and naturally.
+6. When helpful, you may point the user to a relevant next step.
+7. If referring to the application form, always use this exact link: [Application Form](https://ywamsendai.org/en/apply).
+8. Do not create, guess, or output handbook URLs. Handbook source links are provided separately.
+9. Do not invent donate or contact links unless exact approved links are provided.
+10. Use Markdown formatting clearly and naturally.
 
 INFORMATION:
 ${context}`;
@@ -280,7 +295,7 @@ function extractAnswer(aiResponse: any): string {
 }
 
 export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
+  async fetch(request: Request, env: Env) {
     const url = new URL(request.url);
 
     if (request.method === 'OPTIONS') {
@@ -410,7 +425,10 @@ export default {
 
         if (!question || !lang) {
           return new Response(
-            JSON.stringify({ answer: 'Missing required fields: question, lang' }),
+            JSON.stringify({
+              answer: 'Missing required fields: question, lang',
+              sources: [],
+            }),
             {
               status: 400,
               headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -422,7 +440,7 @@ export default {
           text: question,
         })) as any;
 
-        const vector = questionQuery?.data?.[0];
+        const vector = questionQuery?.data?.[0] as number[] | undefined;
 
         if (!vector) {
           return new Response(
@@ -431,6 +449,7 @@ export default {
                 lang === 'ja'
                   ? '申し訳ありません。検索の準備中に問題が発生しました。'
                   : 'Sorry, there was a problem preparing the search.',
+              sources: [],
             }),
             {
               status: 500,
@@ -443,20 +462,47 @@ export default {
           topK: 8,
           returnMetadata: true,
           filter: { lang },
-        });
+        } as any);
 
         const reranked = (rawMatches.matches || [])
           .map((m: any) => ({
             ...m,
-            rerankScore: scoreMatch(question, (m.metadata || {}) as MatchMetadata, m.score || 0),
+            rerankScore: scoreMatch(
+              question,
+              (m.metadata || {}) as MatchMetadata,
+              m.score || 0
+            ),
           }))
           .sort((a: any, b: any) => b.rerankScore - a.rerankScore)
           .slice(0, 4);
 
         const hasUsableMatches =
-          reranked.length > 0 && typeof reranked[0].score === 'number' && reranked[0].score > 0.15;
+          reranked.length > 0 &&
+          typeof reranked[0].score === 'number' &&
+          reranked[0].score > 0.15;
 
         const context = hasUsableMatches ? buildContext(reranked) : '';
+
+        const sourceMap = new Map<string, SourceLink>();
+
+        if (hasUsableMatches) {
+          for (const m of reranked) {
+            const md = (m.metadata || {}) as MatchMetadata;
+            const path = safeString(md.path);
+            if (!path) continue;
+
+            const title = safeString(md.title, path || 'Documentation');
+
+            sourceMap.set(path, {
+              title,
+              path,
+              url: toDocUrl(path),
+              type: 'doc',
+            });
+          }
+        }
+
+        const sources: SourceLink[] = Array.from(sourceMap.values());
 
         if (!context.trim()) {
           const fallback =
@@ -464,9 +510,15 @@ export default {
               ? '申し訳ありません。その質問に関する情報がハンドブック内では見つかりませんでした。別の言い方で質問するか、スタッフにお問い合わせください。'
               : "I'm sorry, I couldn't find that in the handbook. Please try rephrasing your question or contact a staff member.";
 
-          return new Response(JSON.stringify({ answer: fallback }), {
-            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-          });
+          return new Response(
+            JSON.stringify({
+              answer: fallback,
+              sources: [],
+            }),
+            {
+              headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+            }
+          );
         }
 
         const systemPrompt = buildSystemPrompt(lang, context);
@@ -494,14 +546,21 @@ export default {
               : "I'm sorry, I couldn't generate a clear answer. Please try rephrasing your question.";
         }
 
-        return new Response(JSON.stringify({ answer }), {
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        });
+        return new Response(
+          JSON.stringify({
+            answer,
+            sources,
+          }),
+          {
+            headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          }
+        );
       } catch (err: any) {
         console.error('WORKER_ERROR:', err?.message || err);
         return new Response(
           JSON.stringify({
             answer: "I'm having trouble right now. Please try again in a minute.",
+            sources: [],
           }),
           {
             status: 200,
