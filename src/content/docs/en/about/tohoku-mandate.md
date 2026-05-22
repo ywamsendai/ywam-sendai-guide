@@ -80,7 +80,7 @@ However, its primary local responsibility is to serve Sendai and Tohoku faithful
 
 Regional focus matters because it helps turn broad mission language into concrete responsibility. It encourages YWAM Sendai to become accountable, rooted, and consistent in one place rather than scattered in many directions.
 
-It also helps students, staff, supporters, and partners understand the specific context in which YWAM Sendai lives and serves.
+It also helps students, staff, supporters, and partners understand the specific context in which YWAM Sendai lives and serves. 
 
 ## Related pages
 
