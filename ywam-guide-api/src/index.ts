@@ -260,9 +260,10 @@ function buildSystemPrompt(lang: string, context: string): string {
 5. 推測で断定しないでください。
 6. 必要に応じて、ユーザーの次の行動に役立つ案内をしてください。
 7. 申込フォームを案内する場合は、必ずこの正確なリンクを使ってください: [申込フォーム](https://ywamsendai.org/ja/apply)
-8. ハンドブックのURLを推測・生成・出力しないでください。ハンドブックへの参照リンクは別途提供されます。
-9. donate や contact のリンクは、正確な承認済みリンクがある場合のみ案内してください。
-10. 書式はMarkdownを使い、必要な箇所は太字で分かりやすくしてください。
+8. お問い合わせを案内する場合は、必ずこの正確なリンクを使ってください: [お問い合わせ](https://ywamsendai.org/ja/contact)
+9. ハンドブックのURLを推測・生成・出力しないでください。ハンドブックへの参照リンクは別途提供されます。
+10. donateのリンクは、正確な承認済みリンクがある場合のみ案内してください。
+11. 書式はMarkdownを使い、必要な箇所は太字で分かりやすくしてください。
 
 情報:
 ${context}`;
@@ -278,9 +279,10 @@ RULES:
 5. Do not use outside knowledge.
 6. When helpful, you may point the user to a relevant next step.
 7. If referring to the application form, always use this exact link: [Application Form](https://ywamsendai.org/en/apply).
-8. Do not create, guess, or output handbook URLs. Handbook source links are provided separately.
-9. Do not invent donate or contact links unless exact approved links are provided.
-10. Use Markdown formatting clearly and naturally.
+8. If referring to the contact page, always use this exact link: [Contact Us](https://ywamsendai.org/en/contact).
+9. Do not create, guess, or output handbook URLs. Handbook source links are provided separately.
+10. Do not invent donate links unless exact approved links are provided.
+11. Use Markdown formatting clearly and naturally.
 
 INFORMATION:
 ${context}`;
