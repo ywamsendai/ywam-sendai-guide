@@ -133,18 +133,6 @@ export default defineConfig({
           collapsed: true,
         },
         {
-          label: 'History',
-          translations: { ja: '歴史' },
-          autogenerate: { directory: 'history' },
-          collapsed: true,
-        },
-        {
-          label: 'YWAM Global',
-          translations: { ja: 'YWAM Global' },
-          autogenerate: { directory: 'ywam' },
-          collapsed: true,
-        },
-        {
           label: 'Appendix',
           translations: { ja: '付録' },
           autogenerate: { directory: 'appendix' },
