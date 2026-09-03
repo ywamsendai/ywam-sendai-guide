@@ -1,372 +1,1102 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel&family=Inter:wght@300;600&display=swap');
+@import url(
+  'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+JP:wght@400;500;600;700&display=swap'
+);
 
-/* ==========================================================================
-   1. CORE THEME CONSTANTS & FORCED VARIANT CLAMPING
-   ========================================================================== */
+/*
+ * YWAM SENDAI GUIDE
+ * ------------------------------------------------------------
+ * Visual direction:
+ * Sendai / Tohoku + contemporary Japanese design + community
+ *
+ * Light: warm, fresh, paper-like
+ * Dark: deep green, calm, readable
+ * Accent: contemporary Sendai-inspired green
+ *
+ * Designed for:
+ * - Japanese + international Gen Z students
+ * - Long-form handbook reading
+ * - Mobile and desktop
+ * - Starlight light/dark mode
+ */
+
+
+/* ============================================================
+   1. DESIGN TOKENS
+   ============================================================ */
+
 :root {
-  /* The Core "Vibe" Colors */
-  --sl-color-bg: #050505;        /* Your dark background */
-  --sl-color-accent-low: #1a1a1a;
-  --sl-color-accent: #c5a059;    /* Your Gold Accent */
-  --sl-color-accent-high: #e2c284;
-  
-  /* Text & Contrast */
-  --sl-color-white: #ffffff;
-  --sl-color-gray-1: #eeeeee;
-  --sl-color-gray-2: #c2c2c2;
-  --sl-color-gray-3: #8b8b8b;
-  --sl-color-gray-4: #525252;
-  --sl-color-gray-5: #262626;
-  --sl-color-gray-6: #171717;
+  /*
+   * Brand green
+   *
+   * This is intentionally a little more contemporary and
+   * saturated than a literal municipal green.
+   */
+  --ywam-green: #168a5a;
+  --ywam-green-dark: #0f6b46;
+  --ywam-green-light: #ddf3e8;
 
-  /* Typography */
-  --sl-font-system: 'Inter', sans-serif;
-  --sl-font-heading: 'Cinzel', serif; /* Matching your main site headings */
+  /*
+   * Light theme
+   */
+  --ywam-bg-light: #fafcfa;
+  --ywam-surface-light: #f2f7f4;
+  --ywam-surface-strong-light: #e9f2ed;
+  --ywam-text-light: #1b2520;
+  --ywam-text-muted-light: #52605a;
+  --ywam-border-light: #d5e3da;
+
+  /*
+   * Dark theme
+   */
+  --ywam-bg-dark: #101814;
+  --ywam-surface-dark: #17211c;
+  --ywam-surface-strong-dark: #1d2a23;
+  --ywam-text-dark: #edf5f0;
+  --ywam-text-muted-dark: #b7c8be;
+  --ywam-border-dark: #30483b;
+
+  /*
+   * Typography
+   */
+  --ywam-font-sans:
+    'Inter',
+    'Noto Sans JP',
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+
+  --ywam-radius-sm: 6px;
+  --ywam-radius-md: 10px;
+  --ywam-radius-lg: 14px;
+
+  --ywam-transition:
+    160ms ease;
 }
 
-/* Force Dark Mode variables even if the device system prefers light */
+
+
+/* ============================================================
+   3. STARLIGHT COLOUR SYSTEM — LIGHT
+   ============================================================ */
+
 :root,
-html[data-theme='light'],
-html[data-theme='dark'],
-[data-theme='light'],
-[data-theme='dark'] {
-  --sl-color-bg: #050505 !important;
-  --sl-color-bg-nav: #050505 !important;
-  --sl-color-bg-sidebar: #050505 !important;
-  --sl-color-white: #ffffff !important;
-  --sl-color-gray-1: #eeeeee !important;
-  --sl-color-gray-2: #c2c2c2 !important;
-  --sl-color-gray-3: #8b8b8b !important;
-  --sl-color-gray-4: #525252 !important;
-  --sl-color-gray-5: #262626 !important;
-  --sl-color-gray-6: #171717 !important;
-  --sl-color-accent: #c5a059 !important;
-  --sl-color-accent-high: #e2c284 !important;
-  --sl-color-accent-low: #1a1a1a !important;
-  
-  /* Pagefind UI Variables */
-  --pagefind-ui-background: #0a0a0a !important;
-  --pagefind-ui-text: #eeeeee !important;
-  --pagefind-ui-primary: #c5a059 !important;
-  --pagefind-ui-border: rgba(197, 160, 89, 0.2) !important;
+html[data-theme='light'] {
+  /*
+   * Starlight accent
+   */
+  --sl-color-accent-low: #ddf3e8;
+  --sl-color-accent: #168a5a;
+  --sl-color-accent-high: #0f6b46;
+
+  /*
+   * Background
+   */
+  --sl-color-bg: #fafcfa;
+  --sl-color-bg-nav: #fafcfa;
+  --sl-color-bg-sidebar: #f2f7f4;
+
+  /*
+   * Text
+   */
+  --sl-color-white: #1b2520;
+  --sl-color-gray-1: #29352f;
+  --sl-color-gray-2: #52605a;
+  --sl-color-gray-3: #68776f;
+  --sl-color-gray-4: #8a9891;
+  --sl-color-gray-5: #d5e3da;
+  --sl-color-gray-6: #e9f2ed;
+
+  /*
+   * Pagefind
+   */
+  --pagefind-ui-background: #ffffff;
+  --pagefind-ui-text: #1b2520;
+  --pagefind-ui-primary: #168a5a;
+  --pagefind-ui-border: #d5e3da;
 }
 
-/* Hide the theme toggle entirely so no one can even try to switch */
-starlight-theme-select,
-.type-select {
-  display: none !important;
+
+/* ============================================================
+   4. STARLIGHT COLOUR SYSTEM — DARK
+   ============================================================ */
+
+html[data-theme='dark'] {
+  --sl-color-accent-low: #203c30;
+  --sl-color-accent: #45b982;
+  --sl-color-accent-high: #bcebd3;
+
+  --sl-color-bg: #101814;
+  --sl-color-bg-nav: #101814;
+  --sl-color-bg-sidebar: #17211c;
+
+  --sl-color-white: #edf5f0;
+  --sl-color-gray-1: #dce9e1;
+  --sl-color-gray-2: #b7c8be;
+  --sl-color-gray-3: #8fa196;
+  --sl-color-gray-4: #687b70;
+  --sl-color-gray-5: #30483b;
+  --sl-color-gray-6: #1d2a23;
+
+  --pagefind-ui-background: #17211c;
+  --pagefind-ui-text: #edf5f0;
+  --pagefind-ui-primary: #45b982;
+  --pagefind-ui-border: #30483b;
 }
 
 
-/* ==========================================================================
-   2. GLOBAL AESTHETIC TWEAKS (HEADER, SIDEBAR, TYPOGRAPHY)
-   ========================================================================== */
+/* ============================================================
+   5. GLOBAL TYPOGRAPHY
+   ============================================================ */
 
-/* Make the header translucent like your Vibe nav */
-.header {
-  background-color: rgba(5, 5, 5, 0.8) !important;
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+html {
+  font-family: var(--ywam-font-sans);
 }
 
-/* Clean up the sidebar to feel more like a "Portal" */
-.sidebar-content {
-  background-color: #050505 !important;
+body {
+  font-family: var(--ywam-font-sans);
+  background: var(--sl-color-bg);
+  color: var(--sl-color-white);
 }
 
-/* Make sidebar links feel more elegant */
-.sidebar-content a {
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  letter-spacing: 0.02em;
-  color: var(--sl-color-gray-3) !important;
-  transition: color 0.2s ease;
-}
-
-/* Highlight the active page in Gold */
-.sidebar-content a[aria-current="page"] {
-  color: var(--sl-color-accent) !important;
-  font-weight: 500;
-  background-color: rgba(197, 160, 89, 0.05) !important;
-}
-
-/* Style the sidebar group labels (e.g., "1. FOUNDATIONS") */
-.sidebar-content .group-label {
-  font-family: 'Cinzel', serif;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  font-size: 0.75rem;
-  color: var(--sl-color-gray-4) !important;
-  margin-top: 1.5rem;
-}
-
-/* Make links feel more "Gold" and less "Web" */
-a {
-  text-decoration: none !important;
-}
-
-/* Customizing the "Content" area for better focus */
-.main-frame {
-  background-color: #050505;
-}
-
-/* Style the "Language Switcher" to match your minimalist look */
-.sl-flex select {
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-  background: transparent !important;
-  color: #c5a059 !important;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 0.7rem;
-}
-
-/* Make the main markdown typography feel "Monastic" */
 .sl-markdown-content {
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  line-height: 1.8;
+  font-family: var(--ywam-font-sans);
+  font-weight: 400;
+  line-height: 1.75;
+}
+
+
+/*
+ * Japanese typography
+ *
+ * Avoid excessive letter spacing because it looks unnatural
+ * with Japanese text.
+ */
+
+:lang(ja) {
+  font-family:
+    'Noto Sans JP',
+    'Inter',
+    system-ui,
+    sans-serif;
+}
+
+
+/* ============================================================
+   6. HEADINGS
+   ============================================================ */
+
+.sl-markdown-content h1,
+.sl-markdown-content h2,
+.sl-markdown-content h3,
+.sl-markdown-content h4 {
+  font-family: var(--ywam-font-sans) !important;
+  text-transform: none;
+  letter-spacing: normal;
+  line-height: 1.3;
+  font-weight: 700;
+}
+
+
+/*
+ * Main page title
+ */
+
+.sl-markdown-content h1 {
+  color: var(--sl-color-white);
+}
+
+
+/*
+ * Section headings
+ */
+
+.sl-markdown-content h2 {
+  color: var(--sl-color-accent-high);
+}
+
+
+/*
+ * Smaller headings
+ */
+
+.sl-markdown-content h3 {
+  color: var(--sl-color-white);
+}
+
+
+/*
+ * Heading anchor links
+ */
+
+.sl-markdown-content :is(h1, h2, h3, h4) a {
+  color: inherit;
+}
+
+
+/* ============================================================
+   7. LINKS
+   ============================================================ */
+
+.sl-markdown-content a {
+  color: var(--sl-color-accent-high);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+  transition:
+    color var(--ywam-transition),
+    text-decoration-color var(--ywam-transition);
+}
+
+.sl-markdown-content a:hover {
+  color: var(--sl-color-accent);
+}
+
+
+/* ============================================================
+   8. HEADER
+   ============================================================ */
+
+.header {
+  background:
+    color-mix(
+      in srgb,
+      var(--sl-color-bg-nav) 94%,
+      transparent
+    ) !important;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border-bottom: 1px solid var(--sl-color-gray-5) !important;
+}
+
+
+/*
+ * Give the header logo a little breathing room.
+ */
+
+.site-title {
+  font-weight: 600;
+}
+
+/* ============================================================
+   8A. LOGO — LIGHT/DARK MODE
+   ============================================================ */
+
+/*
+ * The YWAM Sendai logo is supplied as a white logo.
+ *
+ * In light mode, turn it into a dark charcoal logo so it
+ * remains clearly visible.
+ */
+
+html[data-theme='light'] .site-title img {
+  filter: brightness(0);
+  opacity: 0.82;
+}
+
+
+/*
+ * In dark mode, use the original white logo.
+ */
+
+html[data-theme='dark'] .site-title img {
+  filter: none;
+  opacity: 0.9;
+}
+
+
+/* ============================================================
+   9. SIDEBAR
+   ============================================================ */
+
+.sidebar-content {
+  background: var(--sl-color-bg-sidebar);
+}
+
+
+/*
+ * Sidebar links
+ */
+
+.sidebar-content a {
+  font-family: var(--ywam-font-sans);
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--sl-color-gray-2) !important;
+
+  border-radius: var(--ywam-radius-sm);
+
+  transition:
+    color var(--ywam-transition),
+    background-color var(--ywam-transition);
+}
+
+
+/*
+ * Hover
+ */
+
+.sidebar-content a:hover {
+  color: var(--sl-color-accent-high) !important;
+  background-color: color-mix(
+    in srgb,
+    var(--sl-color-accent) 7%,
+    transparent
+  );
+}
+
+
+/*
+ * Current page
+ */
+
+.sidebar-content a[aria-current='page'] {
+  color: var(--sl-color-accent-high) !important;
+
+  font-weight: 600;
+
+  background-color: color-mix(
+    in srgb,
+    var(--sl-color-accent) 10%,
+    transparent
+  ) !important;
+
+  box-shadow:
+    inset 3px 0 0 var(--sl-color-accent);
+}
+
+
+/*
+ * Sidebar section labels
+ *
+ * Keep these understated rather than turning them into
+ * large uppercase decorative headings.
+ */
+
+.sidebar-content .group-label {
+  font-family: var(--ywam-font-sans);
+  text-transform: none;
+  letter-spacing: 0.02em;
+  font-size: 0.8rem;
+  font-weight: 700;
+
+  color: var(--sl-color-gray-3) !important;
+
+  margin-top: 1.25rem;
+}
+
+
+/* ============================================================
+   10. CONTENT WIDTH & SPACING
+   ============================================================ */
+
+.sl-container {
+  padding-top: 1rem !important;
+}
+
+
+/*
+ * Comfortable reading width.
+ *
+ * Starlight already handles responsive sizing; this simply
+ * prevents long English paragraphs from becoming tiring.
+ */
+
+.sl-markdown-content {
+  max-width: 72ch;
+}
+
+
+/* ============================================================
+   11. BLOCKQUOTES
+   ============================================================ */
+
+.sl-markdown-content blockquote {
+  margin-block: 1.5rem;
+
+  border-inline-start:
+    4px solid var(--sl-color-accent);
+
+  border-radius: 0 var(--ywam-radius-md) var(--ywam-radius-md) 0;
+
+  background: color-mix(
+    in srgb,
+    var(--sl-color-accent) 7%,
+    var(--sl-color-bg)
+  );
+
+  padding: 1rem 1.25rem;
+
   color: var(--sl-color-gray-2);
 }
 
-/* Use Cinzel for all internal headers */
-.sl-markdown-content h1, 
-.sl-markdown-content h2, 
-.sl-markdown-content h3 {
-  font-family: 'Cinzel', serif !important;
-  color: var(--sl-color-accent) !important;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-weight: 400;
-}
 
-.content-panel h1 {
-  font-family: 'Cinzel', serif !important;
-  color: #c5a059 !important;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-weight: 400;
-  margin-bottom: .5rem;
-}
+/* ============================================================
+   12. INLINE CODE
+   ============================================================ */
 
-/* Tighten the top padding structure */
-.sl-container {
-  padding-top: .5rem !important;
-}
+.sl-markdown-content :not(pre) > code {
+  border-radius: 5px;
 
-/* Add a subtle gold left-border to blockquotes for emphasized vision points */
-.sl-markdown-content blockquote {
-  border-inline-start: 1px solid var(--sl-color-accent);
-  background-color: rgba(197, 160, 89, 0.05);
-  padding: 1rem 2rem;
-  font-style: italic;
+  background: color-mix(
+    in srgb,
+    var(--sl-color-accent) 8%,
+    var(--sl-color-gray-6)
+  );
+
+  color: var(--sl-color-accent-high);
+
+  padding: 0.15em 0.35em;
 }
 
 
-/* ==========================================================================
-   3. LANDING HERO & FOOTER CUSTOM BRANDING
-   ========================================================================== */
+/* ============================================================
+   13. TABLES
+   ============================================================ */
 
-/* Center the Hero text now that the logo is gone */
-.hero {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 60vh; /* Gives the text room to breathe */
-  text-align: center;
+:root,
+html[data-theme='light'] {
+  --ywam-table-header: #e9f4ee;
+  --ywam-table-row: #fafcfa;
+  --ywam-table-row-alt: #f5f9f6;
+  --ywam-table-border: #d5e3da;
+  --ywam-table-header-text: #0f6b46;
 }
 
-.hero-title {
-  font-family: 'Cinzel', serif !important;
-  letter-spacing: 0.4em !important;
-  text-transform: uppercase;
-  color: var(--sl-color-accent) !important; /* Gold Title */
-  margin-bottom: 1rem;
-}
-
-.tagline {
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  font-style: italic;
-  letter-spacing: 0.05em;
-  color: var(--sl-color-gray-2) !important;
-  max-width: 30ch; /* Keeps the text from stretching too wide */
-}
-
-/* Create the Branded Footer */
-footer {
-  border-top: 1px solid rgba(197, 160, 89, 0.1) !important;
-  padding: 4rem 0 !important;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #050505;
-}
-
-/* Inject the Logo as a 'Seal' in the footer */
-footer::before {
-  content: "";
-  display: block;
-  width: 80px; /* Small, elegant size */
-  height: 80px;
-  background-image: url('/src/assets/ywamsendailogo.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  margin-bottom: 2rem;
-  opacity: 0.6; /* Subtle, not shouting */
-  filter: grayscale(1) brightness(1.5); /* Makes it feel like part of the stone/paper */
+html[data-theme='dark'] {
+  --ywam-table-header: #1d3328;
+  --ywam-table-row: #101814;
+  --ywam-table-row-alt: #141f19;
+  --ywam-table-border: #30483b;
+  --ywam-table-header-text: #bcebd3;
 }
 
 
-/* ==========================================================================
-   4. LAYOUT ANIMATION MODIFICATIONS
-   ========================================================================== */
+/*
+ * Table wrapper
+ *
+ * Starlight's content can become narrower than a table on
+ * small screens. Allow the table to scroll horizontally
+ * rather than forcing text into tiny columns.
+ */
 
-/* Kill the old stuttery animation */
-main { animation: none !important; }
-
-/* Use a standard CSS fade that is lighter on the browser */
-.main-frame {
-  opacity: 0;
-  animation: fadeInContent 0.4s ease-out forwards;
-  animation-delay: 0.1s; /* Tiny delay prevents the "flash" */
-}
-
-@keyframes fadeInContent {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.sl-markdown-content .table-wrapper {
+  overflow-x: auto;
+  margin-block: 1.5rem;
 }
 
 
-/* ==========================================================================
-   5. STARLIGHT COMPONENT OVERRIDES (CARDS, STEPS, TIMELINES)
-   ========================================================================== */
+/*
+ * Main table
+ */
 
-/* The Card Container - "Stone Tablet" look */
+.sl-markdown-content table {
+  width: 100%;
+
+  margin-block: 1.5rem;
+
+  border-collapse: separate;
+  border-spacing: 0;
+
+  border: 1px solid var(--ywam-table-border);
+  border-radius: 8px;
+
+  overflow: hidden;
+
+  background: var(--ywam-table-row);
+
+  font-size: 0.95rem;
+
+  line-height: 1.6;
+}
+
+
+/*
+ * Header
+ */
+
+.sl-markdown-content thead {
+  background: var(--ywam-table-header);
+}
+
+
+.sl-markdown-content th {
+  padding: 0.75rem 1rem;
+
+  background: var(--ywam-table-header);
+
+  color: var(--ywam-table-header-text);
+
+  font-weight: 600;
+
+  text-align: start;
+
+  border-bottom:
+    2px solid var(--ywam-table-border);
+}
+
+
+/*
+ * Body cells
+ */
+
+.sl-markdown-content td {
+  padding: 0.75rem 1rem;
+
+  color: var(--sl-color-gray-1);
+
+  border-bottom:
+    1px solid var(--ywam-table-border);
+}
+
+
+/*
+ * Alternating rows
+ *
+ * Kept very subtle so the table remains easy to scan without
+ * becoming visually busy.
+ */
+
+.sl-markdown-content tbody tr:nth-child(even) {
+  background: var(--ywam-table-row-alt);
+}
+
+
+/*
+ * Remove the final horizontal rule.
+ */
+
+.sl-markdown-content tbody tr:last-child td {
+  border-bottom: none;
+}
+
+
+/*
+ * Gentle hover state on desktop.
+ */
+
+@media (hover: hover) {
+  .sl-markdown-content tbody tr:hover {
+    background:
+      color-mix(
+        in srgb,
+        var(--sl-color-accent) 5%,
+        var(--ywam-table-row)
+      );
+  }
+}
+
+
+/*
+ * Make the first column slightly stronger.
+ *
+ * This is particularly useful for schedules such as:
+ * Arrival Day | September 24, 2026
+ */
+
+.sl-markdown-content tbody td:first-child {
+  font-weight: 500;
+  color: var(--sl-color-white);
+}
+
+
+/*
+ * Dates and other short pieces of important information
+ * remain easy to scan.
+ */
+
+.sl-markdown-content td:not(:first-child) {
+  color: var(--sl-color-gray-2);
+}
+
+
+/*
+ * Mobile tables
+ */
+
+@media (max-width: 50rem) {
+  .sl-markdown-content table {
+    font-size: 0.9rem;
+  }
+
+  .sl-markdown-content th,
+  .sl-markdown-content td {
+    padding: 0.65rem 0.75rem;
+  }
+}
+
+
+/* ============================================================
+   14. STARLIGHT CARDS
+   ============================================================ */
+
 .sl-card,
-:is([data-theme="light"]) .sl-card,
-:is([data-theme="light"]) .card {
-  background-color: #0a0a0a !important; /* Slightly lighter than the #050505 background */
-  border: 1px solid rgba(197, 160, 89, 0.15) !important; /* Faint gold border */
-  border-radius: 2px !important; /* Sharp, architectural corners */
-  padding: 1.5rem !important;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  transition: transform 0.3s ease, border-color 0.3s ease;
+.card {
+  background: var(--sl-color-bg-sidebar) !important;
+
+  border:
+    1px solid var(--sl-color-gray-5) !important;
+
+  border-radius: var(--ywam-radius-lg) !important;
+
+  box-shadow:
+    0 4px 18px
+    color-mix(
+      in srgb,
+      var(--sl-color-white) 4%,
+      transparent
+    );
+
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
 }
 
-.sl-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(197, 160, 89, 0.4) !important;
+
+/*
+ * Card hover
+ */
+
+.sl-card:hover,
+.card:hover {
+  transform: translateY(-2px);
+
+  border-color:
+    color-mix(
+      in srgb,
+      var(--sl-color-accent) 45%,
+      var(--sl-color-gray-5)
+    ) !important;
+
+  box-shadow:
+    0 8px 26px
+    color-mix(
+      in srgb,
+      var(--sl-color-accent) 7%,
+      transparent
+    );
 }
 
-/* The Icon inside the card */
+
+/*
+ * Card icon
+ */
+
 .sl-card .icon {
   color: var(--sl-color-accent) !important;
-  background-color: rgba(197, 160, 89, 0.05) !important;
-  border-radius: 0 !important; /* Square icons feel more "monastic" */
-  padding: 0.5rem;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--sl-color-accent) 10%,
+      transparent
+    ) !important;
+
+  border-radius: var(--ywam-radius-md) !important;
 }
 
-/* The Card Title (The "Way") */
-.sl-card .title,
-:is([data-theme="light"]) .sl-card .title {
-  font-family: 'Cinzel', serif !important;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--sl-color-accent) !important;
-  font-size: 1.1rem !important;
+
+/*
+ * Card title
+ */
+
+.sl-card .title {
+  font-family: var(--ywam-font-sans) !important;
+
+  text-transform: none;
+
+  letter-spacing: normal;
+
+  font-weight: 700;
+
+  color: var(--sl-color-white) !important;
 }
 
-/* The Card Body (The Description) */
-.sl-card .description,
-:is([data-theme="light"]) .sl-card .description {
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  line-height: 1.6;
+
+/*
+ * Card description
+ */
+
+.sl-card .description {
+  font-family: var(--ywam-font-sans);
+
+  font-weight: 400;
+
+  line-height: 1.65;
+
   color: var(--sl-color-gray-2) !important;
 }
 
-/* --- Vertical Timeline (Steps) Styling --- */
 
-/* The vertical line connecting the steps */
+/* ============================================================
+   15. STEPS
+   ============================================================ */
+
 .sl-steps {
-  border-inline-start: 2px solid rgba(197, 160, 89, 0.2) !important;
+  border-inline-start:
+    2px solid
+    color-mix(
+      in srgb,
+      var(--sl-color-accent) 25%,
+      var(--sl-color-gray-5)
+    ) !important;
 }
 
-/* The circular numbers/bullets */
+
+/*
+ * Step numbers
+ */
+
 .sl-steps > li::before {
-  background-color: #050505 !important;
-  border: 2px solid var(--sl-color-accent) !important;
+  background: var(--sl-color-bg) !important;
+
+  border:
+    2px solid var(--sl-color-accent) !important;
+
   color: var(--sl-color-accent) !important;
-  font-family: 'Cinzel', serif;
-  font-weight: bold;
+
+  font-family: var(--ywam-font-sans);
+
+  font-weight: 700;
 }
 
-/* The Heading inside the steps */
+
+/*
+ * Step headings
+ */
+
 .sl-steps strong {
-  color: var(--sl-color-accent) !important;
-  font-family: 'Cinzel', serif;
-  letter-spacing: 0.05em;
+  color: var(--sl-color-white);
+
+  font-family: var(--ywam-font-sans);
+
+  letter-spacing: normal;
+
+  font-weight: 700;
 }
 
 
-/* ==========================================================================
-   6. HIGH-PRIORITY SEARCH & MOBILE PLATFORM OVERRIDES (PAGEFIND)
-   ========================================================================== */
+/* ============================================================
+   16. SEARCH
+   ============================================================ */
 
-/* Target the actual desktop button inside the search container */
-:is([data-theme]) #starlight__search button {
-  background-color: transparent !important;
-  border: 1px solid rgba(197, 160, 89, 0.25) !important;
-  border-radius: 4px !important;
-  padding: 0.5rem 1rem !important;
+
+/*
+ * Search trigger
+ */
+
+#starlight__search button {
+  background: var(--sl-color-bg) !important;
+
+  border:
+    1px solid var(--sl-color-gray-5) !important;
+
+  border-radius: var(--ywam-radius-md) !important;
+
   color: var(--sl-color-gray-2) !important;
+
   box-shadow: none !important;
+
+  transition:
+    border-color var(--ywam-transition),
+    background-color var(--ywam-transition);
 }
 
-/* Hover state: Brighten the gold border */
-:is([data-theme]) #starlight__search button:hover {
+
+#starlight__search button:hover {
   border-color: var(--sl-color-accent) !important;
-  background-color: rgba(197, 160, 89, 0.03) !important;
+
+  background:
+    color-mix(
+      in srgb,
+      var(--sl-color-accent) 5%,
+      var(--sl-color-bg)
+    ) !important;
 }
 
-/* Hide the "Ctrl K" / "⌘ K" keyboard shortcut label */
-:is([data-theme]) #starlight__search kbd {
-  display: none !important;
-}
 
-/* Change the magnifying glass icon to your Gold */
-:is([data-theme]) #starlight__search .sl-icon {
+/*
+ * Search icon
+ */
+
+#starlight__search .sl-icon {
   color: var(--sl-color-accent) !important;
 }
 
-/* Force the dynamic search modal and mobile text container background dark */
-div[style*="--pagefind-ui-background"],
-.pagefind-ui,
-#starlight__search,
-.pagefind-ui__modal,
-.pagefind-ui__drawer,
-.pagefind-ui__search-container {
-  --pagefind-ui-background: #0a0a0a !important;
-  --pagefind-ui-text: #eeeeee !important;
-  --pagefind-ui-border: rgba(197, 160, 89, 0.2) !important;
-  background-color: #0a0a0a !important;
+
+/*
+ * Keyboard shortcut
+ */
+
+#starlight__search kbd {
+  color: var(--sl-color-gray-3);
 }
 
-/* Target the search input element text box explicitly on mobile viewports */
+
+/*
+ * Search input
+ */
+
 .pagefind-ui__search-input,
 input.pagefind-ui__search-input,
 #starlight__search input {
-  background-color: #121212 !important;
-  color: #ffffff !important;
-  border: 1px solid rgba(197, 160, 89, 0.3) !important;
+  background: var(--sl-color-bg) !important;
+
+  color: var(--sl-color-white) !important;
+
+  border:
+    1px solid var(--sl-color-gray-5) !important;
+
+  border-radius: var(--ywam-radius-md) !important;
 }
 
-/* Ensure the dynamic results list elements remain legible in search context */
+
+/*
+ * Search results
+ */
+
 .pagefind-ui__result-link {
-  color: #c5a059 !important;
+  color: var(--sl-color-accent-high) !important;
 }
+
+
 .pagefind-ui__result-excerpt {
-  color: #c2c2c2 !important;
+  color: var(--sl-color-gray-2) !important;
+}
+
+
+/* ============================================================
+   17. THEME SELECTOR
+   ============================================================ */
+
+
+/*
+ * Keep Starlight's theme selector visible.
+ *
+ * We intentionally do NOT hide:
+ *
+ * starlight-theme-select
+ * .type-select
+ *
+ * Users can choose light/dark/system normally.
+ */
+
+
+/* ============================================================
+   18. HERO
+   ============================================================ */
+
+.hero {
+  text-align: center;
+}
+
+
+/*
+ * Hero title
+ *
+ * No Cinzel.
+ * No uppercase.
+ * No huge letter spacing.
+ */
+
+.hero-title {
+  font-family: var(--ywam-font-sans) !important;
+
+  text-transform: none;
+
+  letter-spacing: -0.02em !important;
+
+  font-weight: 700;
+
+  color: var(--sl-color-white) !important;
+}
+
+
+/*
+ * Highlight the first/brand part of the hero if Starlight
+ * applies accent styling.
+ */
+
+.hero-title strong,
+.hero-title em {
+  color: var(--sl-color-accent);
+}
+
+
+/*
+ * Hero tagline
+ */
+
+.tagline {
+  font-family: var(--ywam-font-sans);
+
+  font-weight: 400;
+
+  font-style: normal;
+
+  letter-spacing: normal;
+
+  color: var(--sl-color-gray-2) !important;
+
+  max-width: 55ch;
+
+  line-height: 1.7;
+}
+
+
+/* ============================================================
+   19. FOOTER
+   ============================================================ */
+
+footer {
+  border-top:
+    1px solid var(--sl-color-gray-5) !important;
+
+  padding: 3rem 0 !important;
+
+  background: var(--sl-color-bg);
+}
+
+
+/*
+ * Logo/seal
+ *
+ * Keep the logo subtle without applying the old grayscale
+ * filter, which could make the branding look washed out.
+ */
+
+footer::before {
+  content: '';
+
+  display: block;
+
+  width: 72px;
+  height: 72px;
+
+  margin-inline: auto;
+  margin-bottom: 1.5rem;
+
+  background-image:
+    url('/src/assets/ywamsendailogo.png');
+
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  opacity: 0.75;
+}
+
+
+/*
+ * Light mode: convert the white logo to dark charcoal.
+ */
+
+html[data-theme='light'] footer::before {
+  filter: brightness(0);
+  opacity: 0.65;
+}
+
+
+/*
+ * Dark mode: retain the original white logo.
+ */
+
+html[data-theme='dark'] footer::before {
+  filter: none;
+  opacity: 0.9;
+}
+
+
+/* ============================================================
+   20. BUTTONS
+   ============================================================ */
+
+.sl-markdown-content a[role='button'],
+.sl-markdown-content button {
+  border-radius: var(--ywam-radius-md);
+}
+
+
+/* ============================================================
+   21. FOCUS STATES
+   ============================================================ */
+
+/*
+ * Make keyboard navigation clearly visible.
+ *
+ * Particularly important for accessibility.
+ */
+
+:focus-visible {
+  outline:
+    3px solid
+    color-mix(
+      in srgb,
+      var(--sl-color-accent) 65%,
+      transparent
+    );
+
+  outline-offset: 3px;
+}
+
+
+/* ============================================================
+   22. SUBTLE ANIMATION
+   ============================================================ */
+
+
+/*
+ * Avoid the previous global opacity animation.
+ *
+ * Starlight already handles page transitions appropriately.
+ * A global opacity animation can cause unnecessary flashing,
+ * especially on slower mobile devices.
+ */
+
+
+/* ============================================================
+   23. MOBILE
+   ============================================================ */
+
+@media (max-width: 50rem) {
+  .sl-markdown-content {
+    line-height: 1.7;
+  }
+
+  .sl-markdown-content h1 {
+    line-height: 1.25;
+  }
+
+  .sl-markdown-content h2 {
+    line-height: 1.3;
+  }
+
+  .hero-title {
+    letter-spacing: -0.01em !important;
+  }
+
+  .sl-card,
+  .card {
+    border-radius: var(--ywam-radius-md) !important;
+  }
+}
+
+
+/* ============================================================
+   24. REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }

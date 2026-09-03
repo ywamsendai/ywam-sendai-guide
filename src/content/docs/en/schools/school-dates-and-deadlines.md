@@ -29,7 +29,9 @@ Students should use the most current version of this page when planning an appli
 
 ## Upcoming: September 2026 DTS
 
-**Status:** Applications open
+:::tip[Applications closed]
+Applications are currently closed for the September 2026 DTS.
+:::
 
 | Event | Date |
 | :--- | :--- |
