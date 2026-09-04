@@ -1,6 +1,6 @@
 ---
 title: School Costs
-description: The current cost structure for students attending YWAM Sendai schools.
+description: Current school fees and estimated costs for students attending YWAM Sendai's DTS and DBS.
 sidebar:
   order: 3
 audience: student
@@ -9,120 +9,178 @@ scope: local
 status: active
 topic: finance
 priority: high
-last_reviewed: 2026-05-21
+programs:
+  - DTS
+  - DBS
+last_reviewed: 2026-09-04
 ---
 
-## Summary
+> **Current for:** September 2026 DTS and April 2027 DBS  
+> **Last reviewed:** 4 September 2026
 
-Students attending a YWAM Sendai school are responsible for the costs associated with their program. These include fixed school fees as well as some estimated personal or program-related costs, depending on the school.
+## At a glance
 
-This page explains the current cost structure for YWAM Sendai schools and distinguishes between fixed fees and estimated costs.
+The **estimated total cost of the September 2026 YWAM Sendai Discipleship Training School (DTS) is ¥970,000**.
 
-## Who is this page for?
+The **estimated total cost of the April 2027 YWAM Sendai Discipleship Bible School (DBS) is ¥570,000**.
 
-This page is for students applying to or preparing for a YWAM Sendai school.
+These totals include fixed fees and estimated costs. **Program participation fee, accommodation fee, and community meal fees are fixed fees. Local transportation, weekday breakfasts, weekend meals, and DTS outreach are estimated costs and may vary.**
 
-It explains the current cost structure, but students should still read any school-specific instructions carefully.
+### September 2026 DTS
 
-## How are school costs divided?
+|Cost|Amount|Type|
+|-|-:|-|
+|Program participation|¥300,000|Fixed|
+|Accommodation|¥120,000|Fixed|
+|Community meals|¥72,000|Fixed|
+|Local transportation and food|¥78,000|Estimated|
+|Outreach|¥400,000|Estimated|
+|**Estimated total**|**¥970,000**||
 
-YWAM Sendai school costs are divided into different categories:
+**Calculation:** ¥300,000 + ¥120,000 + ¥72,000 + ¥78,000 + ¥400,000 = **¥970,000**
 
-- fixed tuition fees
-- fixed accommodation fees
-- estimated personal living costs
-- estimated outreach costs, where applicable
+**DTS start date:** 24 September 2026
 
-These categories are not all the same. Some are fixed charges, while others are planning estimates that students should budget for.
+### April 2027 DBS
 
-## What does tuition cover?
+|Cost|Amount|Type|
+|-|-:|-|
+|Program participation|¥300,000|Fixed|
+|Accommodation|¥120,000|Fixed|
+|Community meals|¥72,000|Fixed|
+|Local transportation and food|¥78,000|Estimated|
+|Outreach|Not applicable|—|
+|**Estimated total**|**¥570,000**||
 
-The tuition fee is a fixed amount.
+**Calculation:** ¥300,000 + ¥120,000 + ¥72,000 + ¥78,000 = **¥570,000**
+
+**DBS start date:** April 2027
+
+## What does the program participation fee cover?
+
+The **¥300,000 program participation fee is a fixed fee**.
 
 It covers:
-- lectures
-- speaker and teacher-related transport
-- speaker and teacher-related food and accommodation
-- administrative costs
 
-## What does accommodation cover?
+* lectures
+* speaker-related transport
+* speaker-related food and accommodation
+* program administration
 
-The accommodation fee is a fixed amount and is paid in cash.
+Program participation fee does **not** include accommodation, food or local transportation for students.
+
+## What does the accommodation fee cover?
+
+The **¥120,000 accommodation fee is a fixed fee**.
 
 It covers:
-- accommodation
-- wifi
-- utilities
-- shared household consumables
+
+* accommodation
+* Wi-Fi
+* utilities
+* shared household consumables
+
+The accommodation fee is paid **in cash**.
+
+## What does the community meal fee cover?
+
+The **¥72,000 community meal fee is a fixed fee**.
+
+It covers:
+
+* weekday lunches
+* weekday dinners
+* break-time refreshments
+
+The community meal fee is paid **in cash** and does **not** include breakfasts or weekend meals.
 
 ## Are food and local transportation included?
 
-No. Food and local transportation are not included in the tuition fee.
+Weekday lunches, dinners and break-time refreshments are included in the separate community meal fee. 
 
-Students should budget separately for these costs.
+**Breakfasts, weekend meals, and local transportation are not included in any fee.**
 
-## Is outreach included?
+Students should budget approximately **¥78,000 for breakfasts. weekend meals, and local transportation** for the whole school.
 
-For DTS, the outreach phase is budgeted separately from the lecture phase.
+This amount is an estimate rather than a fixed fee. Actual spending may be higher or lower depending on personal circumstances and spending habits.
 
-The outreach amount is currently an estimate, because it depends on factors such as:
-- the overseas outreach destination
-- flight costs
-- other outreach-related expenses
+## Is outreach included in the school fee?
 
-## Are travel costs included in school fees?
+For **DTS, outreach is budgeted separately from the lecture phase**.
 
-Usually, personal travel to and from Japan is not included in the school fee unless clearly stated otherwise.
+The current estimated DTS outreach cost is **¥400,000**.
 
-Students should plan separately for:
-- international travel to and from Japan
-- visa-related costs
-- personal spending
-- any travel outside the stated school costs
+This is an estimate rather than a fixed fee. The final cost may vary depending on factors such as:
 
-## Are personal expenses included?
+* outreach destination
+* flights
+* accommodation
+* local transportation
+* other outreach-related expenses
 
-No. Students should expect to cover their own personal expenses unless a page clearly says otherwise.
+**DBS does not currently include an outreach phase.**
 
-Personal expenses may include:
-- toiletries
-- clothing
-- snacks or personal food
-- local transport outside school requirements
-- SIM card or phone costs
-- medical expenses not covered elsewhere
+## What personal expenses should I budget for?
 
-## What are the current school costs?
+Personal expenses are **not included** in the school cost estimates above.
 
-### Discipleship Training School (DTS)
-- **Intake date:** 24 September 2026
-- **Current fixed tuition fee:** ¥300,000
-- **Current fixed accommodation fee:** ¥120,000
-- **Current estimated budget for food and local transportation:** ¥150,000
-- **Current estimated outreach cost:** ¥400,000
-- **Current estimated total cost for the whole DTS:** ¥970,000
+Students should normally budget separately for expenses such as:
 
-### Discipleship Bible School (DBS)
-- **Intake date:** April 2027
-- **Current fixed tuition fee:** ¥300,000
-- **Current fixed accommodation fee:** ¥120,000
-- **Current estimated budget for food and local transportation:** ¥150,000
-- **Outreach:** Not applicable
-- **Current estimated total cost for the whole DBS:** ¥570,000
+* toiletries
+* clothing
+* snacks and personal food
+* SIM cards and phone costs
+* medical expenses
+* personal activities and entertainment
 
-## Important notes
+## Are travel costs included?
 
-- Tuition is a fixed fee.
-- Accommodation is a fixed fee and is paid in cash.
-- Food and local transportation are not included in tuition and should be budgeted separately.
-- DTS outreach costs are currently estimated and may vary depending on destination and flight costs.
-- Students should make sure they understand which costs are fixed and which costs are estimates.
+**Personal travel to and from Japan is not included in the school costs**.
+
+Students should budget separately for:
+
+* international flights to and from Japan
+* visa-related costs
+* travel insurance
+* personal travel
+* other travel outside school requirements
+
+If a particular school has different arrangements, the school-specific instructions take precedence.
+
+## Which costs are fixed and which are estimates?
+
+The distinction is important:
+
+**Fixed fees**
+
+* Program participation: ¥300,000
+* Accommodation: ¥120,000
+* Community meals: ¥72,000
+
+**Estimated costs**
+
+* Food and local transportation: approximately ¥78,000
+* DTS outreach: approximately ¥400,000
+
+Estimated costs can change. Students should not assume that the estimated total is a guaranteed final amount.
+
+## What is the total amount I should budget?
+
+For the **September 2026 DTS**, students should currently budget approximately **¥970,000 for the school as a whole**, plus personal expenses and travel to and from Japan.
+
+For the **April 2027 DBS**, students should currently budget approximately **¥570,000 for the school as a whole**, plus personal expenses and travel to and from Japan.
+
+## Important
+
+This page is the **authoritative current source for YWAM Sendai school costs**.
+
+If another YWAM Sendai page gives a different amount, check whether that page applies to a different school or intake. When in doubt, contact YWAM Sendai before making travel or financial arrangements.
 
 ## Related pages
 
-- [Payment Schedule](../payment-schedule)
-- [Refunds and Cancellations](../refunds-and-cancellations)
-- [Student Pre-Arrival Preparation](../pre-arrival-preparation)
-- [Payment Methods](../../../finance/payment-methods)
-- [Cash in Japan](../../../finance/cash-in-japan)
-- [Payment Notification](../../../finance/payment-notification)
+* [Payment Schedule](../payment-schedule)
+* [Payment Methods](../../../finance/payment-methods)
+* [Payment Notification](../../../finance/payment-notification)
+* [Refunds and Cancellations](../refunds-and-cancellations)
+* [Student Pre-Arrival Preparation](../pre-arrival-preparation)
+* [Cash in Japan](../../../finance/cash-in-japan)
